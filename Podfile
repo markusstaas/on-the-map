@@ -10,4 +10,5 @@ target 'On The Map' do
 pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
+pod 'ReachabilitySwift'
 end

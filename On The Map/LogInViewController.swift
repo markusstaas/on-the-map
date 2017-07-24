@@ -123,6 +123,8 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         
     }
     
+    
+    
     @IBAction func FBLoginButton(_ sender: Any) {
         FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile"], from: self){
             (result, err) in
