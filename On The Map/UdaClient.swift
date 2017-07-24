@@ -27,6 +27,8 @@ class UdaClient : NSObject {
         super.init()
     }
     
+    
+    // MARK: Udacity Log In
     public func udaLogin(email: String, password: String, handler: @escaping (_ data: Data?, _ response: AnyObject?, _ error: String?) -> Void)  {
         
         let request = NSMutableURLRequest(url: NSURL(string: "\(Constants.BaseURL)/\(Methods.Session)")! as URL)
@@ -40,6 +42,10 @@ class UdaClient : NSObject {
         }
         task.resume()
     }
+    
+    // MARK: Get SessionID
+    
+    
     
     
     
