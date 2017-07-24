@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		285CB5FF1F25D48200C3C50A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285CB5FE1F25D48200C3C50A /* MapViewController.swift */; };
+		285CB6011F25D49300C3C50A /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285CB6001F25D49300C3C50A /* ListViewController.swift */; };
 		288447691F235CED009904A0 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288447681F235CED009904A0 /* GCDBlackBox.swift */; };
 		2894A8431F1F528300DDE940 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894A8421F1F528300DDE940 /* AppDelegate.swift */; };
 		2894A8451F1F528300DDE940 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894A8441F1F528300DDE940 /* LogInViewController.swift */; };
@@ -20,6 +22,8 @@
 
 /* Begin PBXFileReference section */
 		283D07D0FB98FCC99495028F /* Pods-On The Map.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-On The Map.debug.xcconfig"; path = "Pods/Target Support Files/Pods-On The Map/Pods-On The Map.debug.xcconfig"; sourceTree = "<group>"; };
+		285CB5FE1F25D48200C3C50A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		285CB6001F25D49300C3C50A /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		288447681F235CED009904A0 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		2894A83F1F1F528300DDE940 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2894A8421F1F528300DDE940 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				2894A8441F1F528300DDE940 /* LogInViewController.swift */,
+				285CB5FE1F25D48200C3C50A /* MapViewController.swift */,
+				285CB6001F25D49300C3C50A /* ListViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -269,10 +275,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2894A8451F1F528300DDE940 /* LogInViewController.swift in Sources */,
+				285CB5FF1F25D48200C3C50A /* MapViewController.swift in Sources */,
 				28D7F83E1F21CAC5004B4393 /* UdaConstants.swift in Sources */,
 				2894A8431F1F528300DDE940 /* AppDelegate.swift in Sources */,
 				28D7F8401F21CDA6004B4393 /* UdaClient.swift in Sources */,
 				288447691F235CED009904A0 /* GCDBlackBox.swift in Sources */,
+				285CB6011F25D49300C3C50A /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,7 +21,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         if (error == nil) {
             FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (connection, result, err) in
                 if err != nil {
-                    print(err)
+                    self.showErrorAlert(message: "\(err)")
                     return
                 }
                 //print(result)
@@ -93,15 +93,10 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             // successful login
             DispatchQueue.main.async(execute: {
-            self.showErrorAlert(message: "Log In worx!!")
-                })
-            //let session = (json as AnyObject)["account"]! as AnyObject
-          //  self.getUser(id: (session as AnyObject)["key"]! as! String)
-            //DispatchQueue.main.async(execute: {
-                //self.performSegue(withIdentifier: "mapAndTable", sender: self)
-           // })
+                self.loginSuccess()
             
-        }
+                })
+            }
             
         }
     
@@ -117,14 +112,67 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.present(controller, animated: true, completion: nil)
     }
     
+    // MARK: Log-In successful
+    
+    func loginSuccess(){
+        
+        //self.showErrorAlert(message: "Log In worx!!")
+        
+        let controller = storyboard!.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+        present(controller, animated: true, completion: nil)
+        
+    }
+    
     @IBAction func FBLoginButton(_ sender: Any) {
         FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile"], from: self){
             (result, err) in
             if err != nil {
-                print("Custom log-in failed: ", err)
+                self.showErrorAlert(message: "\(err)")
                 return
             }
-            print(result?.token.tokenString!)
+           
+            let FBToken = (result?.token.tokenString!)! as String
+            print(FBToken)
+            
+            //Udacity log in
+            UdaClient.sharedInstance().udaFBLogin(token: FBToken){
+                data, response, error in
+                
+                if error != nil || data == nil { // Handle network error…
+                    DispatchQueue.main.async(execute: {
+                        self.showErrorAlert(message: "Network or URL error")
+                    })
+                    return
+                }
+                let range = Range(5..<data!.count)
+                let newData = data?.subdata(in: range)
+               print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
+               
+                
+                let json: Any!
+                do {
+                    json = try JSONSerialization.jsonObject(with: newData!, options: .allowFragments)
+                } catch {
+                    DispatchQueue.main.async(execute: {
+                        self.showErrorAlert(message: "JSON Parsing Error")
+                    })
+                    return
+                }
+                
+               let errorMessage = (json as AnyObject)["error"]!
+                if errorMessage != nil {
+                    DispatchQueue.main.async(execute: {
+                        self.showErrorAlert(message: "\(errorMessage ?? "")")
+                    })
+                    return
+                }
+                
+                // successful login
+                DispatchQueue.main.async(execute: {
+                    self.loginSuccess()
+                    
+                })
+            }
             
         }
        

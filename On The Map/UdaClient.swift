@@ -11,15 +11,12 @@ import Foundation
 class UdaClient : NSObject {
     
     // MARK: Properties
-    
-    
     var session: URLSession
     var userKey: String
     var sessionID: String
 
     
     // MARK: Initializers
-    
     override init() {
         session = URLSession.shared
         userKey = ""
@@ -42,6 +39,23 @@ class UdaClient : NSObject {
         }
         task.resume()
     }
+    
+    // MARK: Facebook Log In
+    public func udaFBLogin(token: String, handler: @escaping (_ data: Data?, _ response: AnyObject?, _ error: String?) -> Void)  {
+        
+        let request = NSMutableURLRequest(url: NSURL(string: "\(Constants.BaseURL)/\(Methods.Session)")! as URL)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = "{\"\(ParameterKeys.Facebook)\": {\"\(ParameterKeys.AccessToken)\":\"\(token);\"}}".data(using: String.Encoding.utf8)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            handler(data, response, error as? String)
+        }
+        task.resume()
+    }
+    
+    
     
     // MARK: Get SessionID
     
