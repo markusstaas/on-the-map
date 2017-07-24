@@ -47,6 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		288B8B391F25A415002C47B6 /* Udacity */ = {
+			isa = PBXGroup;
+			children = (
+				28D7F83D1F21CAC5004B4393 /* UdaConstants.swift */,
+				28D7F83F1F21CDA6004B4393 /* UdaClient.swift */,
+			);
+			name = Udacity;
+			sourceTree = "<group>";
+		};
 		2894A8361F1F528300DDE940 = {
 			isa = PBXGroup;
 			children = (
@@ -108,8 +117,7 @@
 		28D7F83C1F21CAA3004B4393 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
-				28D7F83D1F21CAC5004B4393 /* UdaConstants.swift */,
-				28D7F83F1F21CDA6004B4393 /* UdaClient.swift */,
+				288B8B391F25A415002C47B6 /* Udacity */,
 			);
 			name = Clients;
 			sourceTree = "<group>";

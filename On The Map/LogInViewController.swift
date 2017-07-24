@@ -46,11 +46,76 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     
     @IBAction func UdaLoginButton(_ sender: Any) {
+        let userEmail = userEmailField.text
+        let userPassword = userPasswordField.text
         
+        guard userEmail?.isEmpty == false else {
+            showErrorAlert(message: "Please enter your email address")
+            return
+        }
+        guard userPassword?.isEmpty == false else {
+            showErrorAlert(message: "Please enter your password")
+            return
+        }
+        
+        
+        
+        //Udacity log in
+        UdaClient.sharedInstance().udaLogin(email: userEmail!, password: userPassword!){
+            data, response, error in
+            
+            if error != nil || data == nil { // Handle network error…
+                DispatchQueue.main.async(execute: {
+                    self.showErrorAlert(message: "Network or URL error")
+                })
+                return
+            }
+            let range = Range(5..<data!.count)
+            let newData = data?.subdata(in: range)
+            
+            let json: Any!
+            do {
+                json = try JSONSerialization.jsonObject(with: newData!, options: .allowFragments)
+            } catch {
+                DispatchQueue.main.async(execute: {
+                    self.showErrorAlert(message: "JSON Parsing Error")
+                })
+                return
+            }
+            
+            let errorMessage = (json as AnyObject)["error"]!
+            if errorMessage != nil {
+                DispatchQueue.main.async(execute: {
+                    self.showErrorAlert(message: "\(errorMessage ?? "")")
+                })
+                return
+            }
+            
+            // successful login
+            DispatchQueue.main.async(execute: {
+            self.showErrorAlert(message: "Log In worx!!")
+                })
+            //let session = (json as AnyObject)["account"]! as AnyObject
+          //  self.getUser(id: (session as AnyObject)["key"]! as! String)
+            //DispatchQueue.main.async(execute: {
+                //self.performSegue(withIdentifier: "mapAndTable", sender: self)
+           // })
+            
+        }
+            
+        }
     
+    
+    
+    func showErrorAlert(message: String, dismissButtonTitle: String = "OK") {
+        let controller = UIAlertController(title: "Error Message:", message: message, preferredStyle: .alert)
+        
+        controller.addAction(UIAlertAction(title: dismissButtonTitle, style: .default) { (action: UIAlertAction!) in
+            controller.dismiss(animated: true, completion: nil)
+        })
+        
+        self.present(controller, animated: true, completion: nil)
     }
-    
-    
     
     @IBAction func FBLoginButton(_ sender: Any) {
         FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile"], from: self){
@@ -64,10 +129,10 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
        
     }
-    
-
-
-
-
 }
+
+
+
+
+
 

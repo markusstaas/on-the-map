@@ -27,10 +27,25 @@ class UdaClient : NSObject {
         super.init()
     }
     
+    public func udaLogin(email: String, password: String, handler: @escaping (_ data: Data?, _ response: AnyObject?, _ error: String?) -> Void)  {
+        
+        let request = NSMutableURLRequest(url: NSURL(string: "\(Constants.BaseURL)/\(Methods.Session)")! as URL)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = "{\"\(ParameterKeys.Udacity)\": {\"\(ParameterKeys.Username)\": \"\(email)\", \"\(ParameterKeys.Password)\": \"\(password)\"}}".data(using: String.Encoding.utf8)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            handler(data, response, error as? String)
+        }
+        task.resume()
+    }
+    
+    
     
     // MARK: POST
     
-   func UdacityLogin(_ method: String, parameters: [String:AnyObject], jsonBody: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+   func taskForPostMethod(_ method: String, parameters: [String:AnyObject], jsonBody: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         /* 1. Set the parameters */
     //
@@ -72,4 +87,16 @@ class UdaClient : NSObject {
     
     }
     
+    // MARK: - Shared Instance -- Singleton
+    
+    class func sharedInstance() -> UdaClient {
+        
+        struct Singleton {
+            static var sharedInstance = UdaClient()
+        }
+        
+        return Singleton.sharedInstance
+    }
+    
+
 }
