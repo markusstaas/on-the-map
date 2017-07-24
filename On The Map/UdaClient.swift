@@ -30,19 +30,17 @@ class UdaClient : NSObject {
     
     // MARK: POST
     
-   func taskForPOSTMethod(_ method: String, parameters: [String:AnyObject], jsonBody: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+   func UdacityLogin(_ method: String, parameters: [String:AnyObject], jsonBody: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         /* 1. Set the parameters */
-    
-
-    
+    //
     
         /* 2/3. Build the URL, Configure the request */
-    let request = NSMutableURLRequest(url: NSURL(string: "https://www.udacity.com/api/session")! as URL)
+    let request = NSMutableURLRequest(url: NSURL(string: "\(Constants.BaseURL)/\(Methods.Session)")! as URL)
     request.httpMethod = "POST"
     request.addValue("application/json", forHTTPHeaderField: "Accept")
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.httpBody = "{\"udacity\": {\"username\": \"account@domain.com\", \"password\": \"********\"}}".data(using: String.Encoding.utf8)
+    request.httpBody = "{\"\(ParameterKeys.Udacity)\": {\"\(ParameterKeys.Username)\": \"account@domain.com\", \"\(ParameterKeys.Password)\": \"********\"}}".data(using: String.Encoding.utf8)
         
         /* 4. Make the request */
     
