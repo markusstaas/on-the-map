@@ -8,11 +8,13 @@
 
 import UIKit
 import FBSDKLoginKit
+import ReachabilitySwift
 
 class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var userEmailField: UITextField!
     @IBOutlet weak var userPasswordField: UITextField!
+    let reachability = Reachability()
     
     var appDelegate: AppDelegate!
     var session : URLSession!
@@ -24,7 +26,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
                     self.showErrorAlert(message: "\(err)")
                     return
                 }
-                //print(result)
+               
             }
             
         }else{
@@ -38,16 +40,27 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Get delegate and shared session
+
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         session = URLSession.shared
+        
+    }
+    
+    func areWeOnline(){
+        if (reachability?.isReachable)! {
+            print("we are online")
+        }else{
+            showErrorAlert(message: "Could not connect to the Internet, please connect to the Internet to use this app")
+        }
+    
     
     }
-
     
     @IBAction func UdaLoginButton(_ sender: Any) {
         let userEmail = userEmailField.text
         let userPassword = userPasswordField.text
+        
+        areWeOnline()
         
         guard userEmail?.isEmpty == false else {
             showErrorAlert(message: "Please enter your email address")
@@ -64,7 +77,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         UdaClient.sharedInstance().udaLogin(email: userEmail!, password: userPassword!){
             data, response, error in
             
-            if error != nil || data == nil { // Handle network error…
+            if error != nil || data == nil {
                 DispatchQueue.main.async(execute: {
                     self.showErrorAlert(message: "Network or URL error")
                 })
@@ -125,7 +138,9 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     
     
+    
     @IBAction func FBLoginButton(_ sender: Any) {
+        self.areWeOnline()
         FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile"], from: self){
             (result, err) in
             if err != nil {
@@ -134,7 +149,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
             }
            
             let FBToken = (result?.token.tokenString!)! as String
-            print(FBToken)
+            //print(FBToken)
             
             //Udacity log in
             UdaClient.sharedInstance().udaFBLogin(token: FBToken){
