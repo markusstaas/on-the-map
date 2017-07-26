@@ -63,6 +63,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzW-j2-AED">
                                         <rect key="frame" x="0.0" y="220" width="343" height="30"/>
                                         <state key="normal" title="Don't have an account? Sign up"/>
+                                        <connections>
+                                            <action selector="udaRegister:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ggH-EY-eWL"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 class UdaClient : NSObject {
     
     // MARK: Properties
@@ -41,8 +42,7 @@ class UdaClient : NSObject {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonBody.data(using: String.Encoding.utf8)
-        print(request.httpBody!)
-        print(request.url!)
+       
         
         /* 4. Make the request */
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
@@ -100,7 +100,7 @@ class UdaClient : NSObject {
                 request.addValue(value, forHTTPHeaderField: key)
             }
         }
-        print(request.url!)
+
         
         /* 4. Make the request */
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
@@ -134,10 +134,12 @@ class UdaClient : NSObject {
     
     
     //////////HELPERS
+    
+    
+    
     // create the URL
     private func udaURLBuilder(_ parameters: [String:AnyObject]?, withPathExtension: String? = nil) -> URL {
         
-        print("paras are \(parameters)")
         var components = URLComponents()
         components.scheme = UdaClient.Constants.ApiScheme
         components.host = UdaClient.Constants.ApiHost
@@ -157,7 +159,7 @@ class UdaClient : NSObject {
         
         let range = Range(uncheckedBounds: (5, data.count))
         let newData = data.subdata(in: range)
-        print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
+       // print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
         var parsedResult: [String:AnyObject]!
         do {
             parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String:AnyObject]
@@ -179,93 +181,6 @@ class UdaClient : NSObject {
     
     
     
-    
-    ///////////OLD
-    /*
-    
-    
-    
-    // MARK: Udacity Log In
-    public func udaLogin(email: String, password: String, handler: @escaping (_ data: Data?, _ response: AnyObject?, _ error: String?) -> Void)  {
-        
-        let request = NSMutableURLRequest(url: NSURL(string: "\(Constants.BaseURL)/\(Methods.Session)")! as URL)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"\(ParameterKeys.Udacity)\": {\"\(ParameterKeys.Username)\": \"\(email)\", \"\(ParameterKeys.Password)\": \"\(password)\"}}".data(using: String.Encoding.utf8)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            handler(data, response, error as? String)
-        }
-        task.resume()
-    }
-    
-    // MARK: Facebook Log In
-    public func udaFBLogin(token: String, handler: @escaping (_ data: Data?, _ response: AnyObject?, _ error: String?) -> Void)  {
-        
-        let request = NSMutableURLRequest(url: NSURL(string: "\(Constants.BaseURL)/\(Methods.Session)")! as URL)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"\(ParameterKeys.Facebook)\": {\"\(ParameterKeys.AccessToken)\":\"\(token);\"}}".data(using: String.Encoding.utf8)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            handler(data, response, error as? String)
-        }
-        task.resume()
-    }
-    
-    
-    
-    // MARK: Get SessionID
-    
-    
-    
-    
-    
-    // MARK: POST
-    
-   func taskForPostMethod(_ method: String, parameters: [String:AnyObject], jsonBody: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
-        
-        /* 1. Set the parameters */
-    //
-    
-        /* 2/3. Build the URL, Configure the request */
-    let request = NSMutableURLRequest(url: NSURL(string: "\(Constants.BaseURL)/\(Methods.Session)")! as URL)
-    request.httpMethod = "POST"
-    request.addValue("application/json", forHTTPHeaderField: "Accept")
-    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.httpBody = "{\"\(ParameterKeys.Udacity)\": {\"\(ParameterKeys.Username)\": \"account@domain.com\", \"\(ParameterKeys.Password)\": \"********\"}}".data(using: String.Encoding.utf8)
-        
-        /* 4. Make the request */
-    
-    
-    let session = URLSession.shared
-    let task = session.dataTask(with: request as URLRequest) { data, response, error in
-        if error != nil { // Handle error…
-            return
-        }
-        
-    
-    }
-
-            /* GUARD: Was there an error? */
-          
-            
-            /* GUARD: Did we get a successful 2XX response? */
-          
-            
-            /* GUARD: Was there any data returned? */
-        
-            
-            /* 5/6. Parse the data and use the data (happens in completion handler) */
-       
-        
-        /* 7. Start the request */
-        task.resume()
-        return task
-    
-    }*/
     
     // MARK: - Shared Instance -- Singleton
     

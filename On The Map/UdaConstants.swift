@@ -12,7 +12,7 @@ struct Constants {
     static let ApiScheme = "https"
     static let ApiHost = "www.udacity.com"
     static let ApiPath = "/"
-    static let SignUpUdacity = "https://www.udacity.com/account/auth#!/signup"
+    static let UdacityRegistration = "https://auth.udacity.com/sign-up"
     static let fbAppId = "365362206864879"
     static let BaseURL = "https://www.udacity.com/api"
 }

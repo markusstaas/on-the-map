@@ -16,7 +16,7 @@ extension UdaClient{
         /* chain completion handlers for each request so that they run one after the other */
         postSessionWithUdacity(username, password) { (success, sessionID, userID, registered, expiration, errorString) in
             guard (success == true) else {
-                print("There was an error in authenticateWithViewController")
+                print("AuthenticateWithViewController Error")
                 completionHandlerForAuth(success, errorString)
                 return
             }
@@ -45,7 +45,7 @@ extension UdaClient{
         /* chain completion handlers for each request so that they run one after the other */
         postFBSessionWithUdacity(token) { (success, sessionID, userID, registered, expiration, errorString) in
             guard (success == true) else {
-                print("There was an error in authenticateWithFBViewController")
+                print("AuthenticateWithFBViewController Error")
                 completionHandlerForAuth(success, errorString)
                 return
             }
@@ -81,23 +81,23 @@ extension UdaClient{
         let parameters: [String:AnyObject]? = nil
         let method: String = Methods.AuthenticationSessionNew
         let jsonBody = "{\"\(UdaClient.ParameterKeys.Udacity)\": {\"\(UdaClient.ParameterKeys.UserName)\": \"" + username! + "\", \"\(UdaClient.ParameterKeys.Password)\": \"" + password! + "\"}}"
-        print(jsonBody)
+        
         
         /* 2. Make the request */
         let _ = taskForPOSTMethod(method, parameters: parameters, jsonBody: jsonBody) { (results, error) in
             
             /* 3. Send the desired value(s) to the completion handler */
             guard (error == nil) else {
-                print("There was an error in postSessionWithUdacity")
+                print("postSessionWithUdacity Error")
                 completionHandlerForUdacityLogin(false, nil, nil, nil, nil, error)
                 return
             }
             guard let sessionDictionary = results?[UdaClient.JSONResponseKeys.Session] as? [String:AnyObject], let accountDictionary = results?[UdaClient.JSONResponseKeys.Account] as? [String:AnyObject], let registered = accountDictionary[UdaClient.JSONResponseKeys.Registered] as? Bool, let sessionID = sessionDictionary[UdaClient.JSONResponseKeys.ID] as? String, let userID = accountDictionary[UdaClient.JSONResponseKeys.Key] as? String?, let expiration = sessionDictionary[UdaClient.JSONResponseKeys.Expiration] as? String else {
                 completionHandlerForUdacityLogin(false, nil, nil, nil, nil, "Could not find 'Session ID' and/or 'UserID' in parsed result")
-                print("There was an error parsing data in postSessionWithUdacity")
+                print("postSessionWithUdacity parsing error")
                 return
             }
-            print("session ID is \(sessionID) and user ID is \(String(describing: userID))")
+            //print("session ID is \(sessionID) and user ID is \(String(describing: userID))")
             completionHandlerForUdacityLogin(true, sessionID, userID, registered, expiration, nil)
         }
     }
@@ -106,23 +106,23 @@ extension UdaClient{
         /* 1. Specify parameters (for now, "nil", but good to have if method ever changes) and HTTP body */
         let parameters: [String:AnyObject]? = nil
         let method: String = Methods.AuthenticationSessionNew
-        let jsonBody = "{\"\(UdaClient.ParameterKeys.Facebook)\": {\"\(UdaClient.ParameterKeys.AccessToken)\": \"" + token! + "\", \"}}"
-        print(jsonBody)
+        let jsonBody = "{\"\(UdaClient.ParameterKeys.Facebook)\": {\"\(UdaClient.ParameterKeys.AccessToken)\":\"\(token!);\"}}"
+        
         /* 2. Make the request */
         let _ = taskForPOSTMethod(method, parameters: parameters, jsonBody: jsonBody) { (results, error) in
             
             /* 3. Send the desired value(s) to the completion handler */
             guard (error == nil) else {
-                print("There was an error in postFBSessionWithUdacity")
+                print("postFBSessionWithUdacity Error")
                 completionHandlerForUdacityLogin(false, nil, nil, nil, nil, error)
                 return
             }
             guard let sessionDictionary = results?[UdaClient.JSONResponseKeys.Session] as? [String:AnyObject], let accountDictionary = results?[UdaClient.JSONResponseKeys.Account] as? [String:AnyObject], let registered = accountDictionary[UdaClient.JSONResponseKeys.Registered] as? Bool, let sessionID = sessionDictionary[UdaClient.JSONResponseKeys.ID] as? String, let userID = accountDictionary[UdaClient.JSONResponseKeys.Key] as? String?, let expiration = sessionDictionary[UdaClient.JSONResponseKeys.Expiration] as? String else {
                 completionHandlerForUdacityLogin(false, nil, nil, nil, nil, "Could not find 'Session ID' and/or 'UserID' in parsed result")
-                print("There was an error parsing data in postSessionWithUdacity")
+                print("postSessionWithUdacity parsing error")
                 return
             }
-            print("session ID is \(sessionID) and user ID is \(String(describing: userID))")
+            //print("session ID is \(sessionID) and user ID is \(String(describing: userID))")
             completionHandlerForUdacityLogin(true, sessionID, userID, registered, expiration, nil)
         }
     }
@@ -151,7 +151,7 @@ extension UdaClient{
                 completionHandlerForGetPublicUserData(false, nil, nil, "Could not find 'First Name' and/or 'Last Name' in parsed result")
                 return
             }
-            print(firstName + " " + lastName)
+            //print(firstName + " " + lastName)
             completionHandlerForGetPublicUserData(true, firstName, lastName, nil)
         }
     }

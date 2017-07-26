@@ -26,7 +26,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
                     self.showErrorAlert(message: "\(err)")
                     return
                 }
-               
+
             }
             
         }else{
@@ -45,11 +45,13 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         
     }
     
-    func areWeOnline(){
+    func areWeOnline() -> Bool{
         if (reachability?.isReachable)! {
-            print("we are online")
+            return true
+            
         }else{
             showErrorAlert(message: "Could not connect to the Internet, please connect to the Internet to use this app")
+            return false
         }
     }
     
@@ -57,7 +59,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         let userEmail = userEmailField.text
         let userPassword = userPasswordField.text
         
-        areWeOnline()
+        if areWeOnline() != false{
         
         guard userEmail?.isEmpty == false else {
             showErrorAlert(message: "Please enter your email address")
@@ -81,9 +83,15 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
                 }
             }
         }
+    }
  }
-    
-    
+
+    @IBAction func udaRegister(_ sender: Any) {
+        if areWeOnline() != false{
+        let url = URL(string: UdaClient.Constants.UdacityRegistration)!
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    }
     
     func showErrorAlert(message: String, dismissButtonTitle: String = "Cool") {
         let controller = UIAlertController(title: "Error Message:", message: message, preferredStyle: .alert)
@@ -106,22 +114,21 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     
     @IBAction func FBLoginButton(_ sender: Any) {
-        self.areWeOnline()
+        if areWeOnline() != false {
         FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile"], from: self){
             (result, err) in
             if err != nil {
                 self.showErrorAlert(message: "\(err)")
                 return
             }
-           
-            let FBToken = (result?.token.tokenString!)! as String
-            //print(FBToken)
-          
+            let FBToken = (result?.token.tokenString)! as String
+            
+          LoadingIndicator.sharedInstance().startIndicator(self)
             UdaClient.sharedInstance().authenticateWithFBViewController(self, token: FBToken){
                 (success, errorString) in
                 
                 performUIUpdatesOnMain {
-                    
+                    LoadingIndicator.sharedInstance().stopIndicator(self)
                     if success{
                         self.loginSuccess()
                     } else {
@@ -133,7 +140,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             
         }
-       
+    }
     }
 }
 
