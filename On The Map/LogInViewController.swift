@@ -48,7 +48,6 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
     func areWeOnline() -> Bool{
         if (reachability?.isReachable)! {
             return true
-            
         }else{
             showErrorAlert(message: "Could not connect to the Internet, please connect to the Internet to use this app")
             return false
@@ -86,6 +85,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
  }
 
+
     @IBAction func udaRegister(_ sender: Any) {
         if areWeOnline() != false{
         let url = URL(string: UdaClient.Constants.UdacityRegistration)!
@@ -121,7 +121,9 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
                 self.showErrorAlert(message: "\(err)")
                 return
             }
-            let FBToken = (result?.token.tokenString)! as String
+            
+            
+        let FBToken = (result?.token.tokenString)! as String
             
           LoadingIndicator.sharedInstance().startIndicator(self)
             UdaClient.sharedInstance().authenticateWithFBViewController(self, token: FBToken){

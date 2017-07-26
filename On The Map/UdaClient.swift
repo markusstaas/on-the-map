@@ -132,6 +132,96 @@ class UdaClient : NSObject {
         return task
     }
     
+    // MARK: Logout with Udacity method
+    func logoutSessionWithUdacity(completionHandlerForLogoutSessionWithUdacity: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
+        
+        /* 1. Specify the parameters (for now, "nil", but good to have if method ever changes) */
+        let parameters: [String:AnyObject]? = nil
+        let method: String = Methods.LogoutSessionWithUdacity
+        
+        /* 2. Make the request */
+        let _ = taskForDELETEMethod(method, parameters: parameters) { (results, error) in
+            
+            /* 3. Send the desired values to the completion handler */
+            guard (error == nil) else {
+                completionHandlerForLogoutSessionWithUdacity(false, error)
+                return
+            }
+            guard let sessionDictionary = results?[UdaClient.ResponseKeys.Session] as? [String:AnyObject], let id = sessionDictionary[UdaClient.ResponseKeys.ID] as? String else {
+                completionHandlerForLogoutSessionWithUdacity(false, "Could not logout of session")
+                return
+            }
+            if (id != ""), (id.isEmpty == false) {
+                completionHandlerForLogoutSessionWithUdacity(true, error)
+            } else {
+                completionHandlerForLogoutSessionWithUdacity(false, "Could not identify sessionID")
+            }
+        }
+    }
+    // MARK: DELETE
+    func taskForDELETEMethod(_ method: String?, parameters: [String:AnyObject]?, completionHandlerForDeleteMethod: @escaping (_ result: [String: AnyObject]?, _ errorString: String?) -> Void) -> URLSessionDataTask {
+        
+        /* 1. Set the parameters (if any) */
+        var parametersForRequest: [String:AnyObject]? = nil
+        if (parameters != nil) {
+            parametersForRequest = parameters
+        }
+        
+        /* 2/3. Buld the URL, Configure the request */
+        let request = NSMutableURLRequest(url: udaURLBuilder(parametersForRequest, withPathExtension: method))
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        /* 4. Make the request */
+        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+            func sendError(_ error: String) {
+                print(error)
+                completionHandlerForDeleteMethod(nil, error)
+            }
+            /* GUARD: Was there an error? */
+            guard (error == nil) else {
+                print("There was an error with your request")
+                sendError("There was an error with your request: \(error!.localizedDescription)")
+                return
+            }
+            /* GUARD: Did we get a successful 2XX response? */
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                print("Your request returned a status code other than 2xx!")
+                sendError("Your request returned a status code other than 2xx!")
+                return
+            }
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                print("No data was returned by the request")
+                sendError("No data was returned by the request!")
+                return
+            }
+            
+            /* 5/6. Parse the data and use the data (happens in the completion handler) */
+            self.convertJSONDataWithCompletionHandler(data, completionHandlerForConvertedData: completionHandlerForDeleteMethod)
+        }
+        
+        /* 7. Start the request */
+        task.resume()
+        return task
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     //////////HELPERS
     

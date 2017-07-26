@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -64,7 +65,7 @@
                                         <rect key="frame" x="0.0" y="220" width="343" height="30"/>
                                         <state key="normal" title="Don't have an account? Sign up"/>
                                         <connections>
-                                            <action selector="udaRegister:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ggH-EY-eWL"/>
+                                            <action selector="udaRegister:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1zu-be-uON"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -144,7 +145,17 @@
                             <constraint firstItem="X3W-jX-LD8" firstAttribute="centerX" secondItem="keX-Z4-gpr" secondAttribute="centerX" id="tLb-01-e9T"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="4j4-Fz-p8h"/>
+                    <navigationItem key="navigationItem" id="4j4-Fz-p8h" userLabel="On The Map">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="HXk-sn-z9i">
+                            <connections>
+                                <action selector="logOutButton:" destination="htP-6q-jUT" id="kbh-pL-29k"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" id="5tm-70-ssJ"/>
+                            <barButtonItem title="Item" id="6uh-Eh-9gg"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T0V-Te-0NE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

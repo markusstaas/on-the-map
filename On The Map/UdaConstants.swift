@@ -9,29 +9,19 @@
 extension UdaClient {
 
 struct Constants {
+    static let fbAppId = "365362206864879"
+    static let BaseURL = "https://www.udacity.com/api"
     static let ApiScheme = "https"
     static let ApiHost = "www.udacity.com"
     static let ApiPath = "/"
     static let UdacityRegistration = "https://auth.udacity.com/sign-up"
-    static let fbAppId = "365362206864879"
-    static let BaseURL = "https://www.udacity.com/api"
 }
-
-
-struct Headers {
-    static let XSRF = "X-XSRF-TOKEN"
-}
-
-
 struct Methods {
-    static let AuthenticationSessionNew = "api/session"
-    static let GetPublicUserData = "api/users/<user_id>"
+    static let AuthenticationSession = "api/session"
+    static let GetUserData = "api/users/<user_id>"
     static let LogoutSessionWithUdacity = "api/session"
 }
-
-// WAS CALLED: JSON Body Keys
 struct ParameterKeys {
-    
     static let Udacity = "udacity"
     static let Facebook = "facebook_mobile"
     static let AccessToken = "access_token"
@@ -39,21 +29,14 @@ struct ParameterKeys {
     static let Password = "password"
 }
 
-// MARK: URL Keys
 struct URLKeys {
     static let UserID = "user_id"
 }
-
-// MARK: JSON Body Values
 struct JSONBodyValues {
-    
     static let UserName = ""
     static let Password = ""
 }
-
-// MARK: JSON Response Keys
-struct JSONResponseKeys {
-    
+struct ResponseKeys {
     static let FirstName = "first_name"
     static let LastName = "last_name"
     static let User = "user"

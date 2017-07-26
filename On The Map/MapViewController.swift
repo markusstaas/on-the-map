@@ -15,16 +15,34 @@ class MapViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    
+    @IBAction func logOutButton(_ sender: Any) {
+        LoadingIndicator.sharedInstance().startIndicator(self)
+        UdaClient.sharedInstance().logoutSessionWithUdacity(){(success, errorString) in
+            
+            performUIUpdatesOnMain {
+                LoadingIndicator.sharedInstance().stopIndicator(self)
+                if success{
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    self.showErrorAlert(message: errorString!)
+                }
+            }
+        }
     }
-    */
+    
+    
+    
+    func showErrorAlert(message: String, dismissButtonTitle: String = "Cool") {
+        let controller = UIAlertController(title: "Error Message:", message: message, preferredStyle: .alert)
+        
+        controller.addAction(UIAlertAction(title: dismissButtonTitle, style: .default) { (action: UIAlertAction!) in
+            controller.dismiss(animated: true, completion: nil)
+        })
+        
+        self.present(controller, animated: true, completion: nil)
+    }
+    
 
 }
