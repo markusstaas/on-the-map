@@ -17,6 +17,10 @@
 		2894A8481F1F528300DDE940 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2894A8461F1F528300DDE940 /* Main.storyboard */; };
 		2894A84A1F1F528300DDE940 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2894A8491F1F528300DDE940 /* Assets.xcassets */; };
 		2894A84D1F1F528300DDE940 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2894A84B1F1F528300DDE940 /* LaunchScreen.storyboard */; };
+		28ABF2991F2851F700BDB857 /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABF2981F2851F700BDB857 /* ParseConstants.swift */; };
+		28ABF29B1F28523000BDB857 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABF29A1F28523000BDB857 /* ParseClient.swift */; };
+		28ABF29D1F2852C500BDB857 /* ParseConvinience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABF29C1F2852C500BDB857 /* ParseConvinience.swift */; };
+		28ABF29F1F2852FB00BDB857 /* StudentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABF29E1F2852FB00BDB857 /* StudentLocations.swift */; };
 		28D7F83E1F21CAC5004B4393 /* UdaConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D7F83D1F21CAC5004B4393 /* UdaConstants.swift */; };
 		28D7F8401F21CDA6004B4393 /* UdaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D7F83F1F21CDA6004B4393 /* UdaClient.swift */; };
 		97CC75BE0EF160F7D211FB08 /* Pods_On_The_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCABEAA3C7DF27096E50BDA /* Pods_On_The_Map.framework */; };
@@ -36,6 +40,10 @@
 		2894A8491F1F528300DDE940 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2894A84C1F1F528300DDE940 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2894A84E1F1F528300DDE940 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28ABF2981F2851F700BDB857 /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
+		28ABF29A1F28523000BDB857 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
+		28ABF29C1F2852C500BDB857 /* ParseConvinience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConvinience.swift; sourceTree = "<group>"; };
+		28ABF29E1F2852FB00BDB857 /* StudentLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocations.swift; sourceTree = "<group>"; };
 		28D7F8381F21B909004B4393 /* On The Map.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "On The Map.entitlements"; sourceTree = "<group>"; };
 		28D7F83D1F21CAC5004B4393 /* UdaConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdaConstants.swift; sourceTree = "<group>"; };
 		28D7F83F1F21CDA6004B4393 /* UdaClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdaClient.swift; sourceTree = "<group>"; };
@@ -97,6 +105,17 @@
 			path = "On The Map";
 			sourceTree = "<group>";
 		};
+		28ABF2971F2851C900BDB857 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				28ABF2981F2851F700BDB857 /* ParseConstants.swift */,
+				28ABF29A1F28523000BDB857 /* ParseClient.swift */,
+				28ABF29C1F2852C500BDB857 /* ParseConvinience.swift */,
+				28ABF29E1F2852FB00BDB857 /* StudentLocations.swift */,
+			);
+			name = Parse;
+			sourceTree = "<group>";
+		};
 		28D7F8391F21C745004B4393 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +148,7 @@
 		28D7F83C1F21CAA3004B4393 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				28ABF2971F2851C900BDB857 /* Parse */,
 				288B8B391F25A415002C47B6 /* Udacity */,
 			);
 			name = Clients;
@@ -283,12 +303,16 @@
 				287F8F471F27420A0085967C /* LoadingIndicator.swift in Sources */,
 				2894A8451F1F528300DDE940 /* LogInViewController.swift in Sources */,
 				285CB5FF1F25D48200C3C50A /* MapViewController.swift in Sources */,
+				28ABF2991F2851F700BDB857 /* ParseConstants.swift in Sources */,
 				287F8F451F273D160085967C /* UdaConvinience.swift in Sources */,
 				28D7F83E1F21CAC5004B4393 /* UdaConstants.swift in Sources */,
 				2894A8431F1F528300DDE940 /* AppDelegate.swift in Sources */,
 				28D7F8401F21CDA6004B4393 /* UdaClient.swift in Sources */,
 				288447691F235CED009904A0 /* GCDBlackBox.swift in Sources */,
+				28ABF29D1F2852C500BDB857 /* ParseConvinience.swift in Sources */,
 				285CB6011F25D49300C3C50A /* ListViewController.swift in Sources */,
+				28ABF29B1F28523000BDB857 /* ParseClient.swift in Sources */,
+				28ABF29F1F2852FB00BDB857 /* StudentLocations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

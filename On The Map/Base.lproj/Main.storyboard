@@ -132,17 +132,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3W-jX-LD8">
-                                <rect key="frame" x="170.5" y="323" width="34" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5jW-zQ-hs3">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="X3W-jX-LD8" firstAttribute="centerY" secondItem="keX-Z4-gpr" secondAttribute="centerY" id="PoB-Ga-gBK"/>
-                            <constraint firstItem="X3W-jX-LD8" firstAttribute="centerX" secondItem="keX-Z4-gpr" secondAttribute="centerX" id="tLb-01-e9T"/>
+                            <constraint firstItem="5jW-zQ-hs3" firstAttribute="leading" secondItem="keX-Z4-gpr" secondAttribute="leading" id="2K4-Ge-GIU"/>
+                            <constraint firstAttribute="trailing" secondItem="5jW-zQ-hs3" secondAttribute="trailing" id="6ri-lE-hES"/>
+                            <constraint firstItem="nxg-oY-w2N" firstAttribute="top" secondItem="5jW-zQ-hs3" secondAttribute="bottom" id="Eus-DF-U7r"/>
+                            <constraint firstItem="5jW-zQ-hs3" firstAttribute="top" secondItem="baj-gV-XJK" secondAttribute="bottom" id="dAm-jw-VrF"/>
+                            <constraint firstItem="5jW-zQ-hs3" firstAttribute="centerX" secondItem="keX-Z4-gpr" secondAttribute="centerX" id="jYH-Nk-dIR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4j4-Fz-p8h" userLabel="On The Map">
@@ -156,6 +156,9 @@
                             <barButtonItem title="Item" id="6uh-Eh-9gg"/>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapKitView" destination="5jW-zQ-hs3" id="lqa-Ig-IaK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T0V-Te-0NE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

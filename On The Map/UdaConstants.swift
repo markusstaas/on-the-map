@@ -10,7 +10,7 @@ extension UdaClient {
 
 struct Constants {
     static let fbAppId = "365362206864879"
-    static let BaseURL = "https://www.udacity.com/api"
+    //static let BaseURL = "https://www.udacity.com/api"
     static let ApiScheme = "https"
     static let ApiHost = "www.udacity.com"
     static let ApiPath = "/"
