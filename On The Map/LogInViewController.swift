@@ -33,14 +33,13 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
             print(error)
         }
     }
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        print("User logged out")
-    }
     
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         session = URLSession.shared
         
@@ -52,8 +51,6 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         }else{
             showErrorAlert(message: "Could not connect to the Internet, please connect to the Internet to use this app")
         }
-    
-    
     }
     
     @IBAction func UdaLoginButton(_ sender: Any) {
@@ -71,51 +68,24 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
             return
         }
         
-        
-        
-        //Udacity log in
-        UdaClient.sharedInstance().udaLogin(email: userEmail!, password: userPassword!){
-            data, response, error in
+        LoadingIndicator.sharedInstance().startIndicator(self)
+        UdaClient.sharedInstance().authenticateWithViewController(self, username: userEmail, password: userPassword){
+            (success, errorString) in
             
-            if error != nil || data == nil {
-                DispatchQueue.main.async(execute: {
-                    self.showErrorAlert(message: "Network or URL error")
-                })
-                return
+            performUIUpdatesOnMain {
+                LoadingIndicator.sharedInstance().stopIndicator(self)
+                if success{
+                    self.loginSuccess()
+                } else {
+                    self.showErrorAlert(message: errorString!)
+                }
             }
-            let range = Range(5..<data!.count)
-            let newData = data?.subdata(in: range)
-            
-            let json: Any!
-            do {
-                json = try JSONSerialization.jsonObject(with: newData!, options: .allowFragments)
-            } catch {
-                DispatchQueue.main.async(execute: {
-                    self.showErrorAlert(message: "JSON Parsing Error")
-                })
-                return
-            }
-            
-            let errorMessage = (json as AnyObject)["error"]!
-            if errorMessage != nil {
-                DispatchQueue.main.async(execute: {
-                    self.showErrorAlert(message: "\(errorMessage ?? "")")
-                })
-                return
-            }
-            
-            // successful login
-            DispatchQueue.main.async(execute: {
-                self.loginSuccess()
-            
-                })
-            }
-            
         }
+ }
     
     
     
-    func showErrorAlert(message: String, dismissButtonTitle: String = "OK") {
+    func showErrorAlert(message: String, dismissButtonTitle: String = "Cool") {
         let controller = UIAlertController(title: "Error Message:", message: message, preferredStyle: .alert)
         
         controller.addAction(UIAlertAction(title: dismissButtonTitle, style: .default) { (action: UIAlertAction!) in
@@ -128,12 +98,8 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
     // MARK: Log-In successful
     
     func loginSuccess(){
-        
-        //self.showErrorAlert(message: "Log In worx!!")
-        
         let controller = storyboard!.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
         present(controller, animated: true, completion: nil)
-        
     }
     
     
@@ -150,46 +116,21 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
            
             let FBToken = (result?.token.tokenString!)! as String
             //print(FBToken)
-            
-            //Udacity log in
-            UdaClient.sharedInstance().udaFBLogin(token: FBToken){
-                data, response, error in
+          
+            UdaClient.sharedInstance().authenticateWithFBViewController(self, token: FBToken){
+                (success, errorString) in
                 
-                if error != nil || data == nil { // Handle network error…
-                    DispatchQueue.main.async(execute: {
-                        self.showErrorAlert(message: "Network or URL error")
-                    })
-                    return
-                }
-                let range = Range(5..<data!.count)
-                let newData = data?.subdata(in: range)
-               print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
-               
-                
-                let json: Any!
-                do {
-                    json = try JSONSerialization.jsonObject(with: newData!, options: .allowFragments)
-                } catch {
-                    DispatchQueue.main.async(execute: {
-                        self.showErrorAlert(message: "JSON Parsing Error")
-                    })
-                    return
-                }
-                
-               let errorMessage = (json as AnyObject)["error"]!
-                if errorMessage != nil {
-                    DispatchQueue.main.async(execute: {
-                        self.showErrorAlert(message: "\(errorMessage ?? "")")
-                    })
-                    return
-                }
-                
-                // successful login
-                DispatchQueue.main.async(execute: {
-                    self.loginSuccess()
+                performUIUpdatesOnMain {
                     
-                })
+                    if success{
+                        self.loginSuccess()
+                    } else {
+                        self.showErrorAlert(message: errorString!)
+                    }
+                }
             }
+            
+            
             
         }
        
