@@ -67,7 +67,8 @@ class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Student.sharedInstance().studentLocationsList.count
+        let completeSet = Student.sharedInstance().studentLocationsList
+        return completeSet.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let student = Student.sharedInstance().studentLocationsList[(indexPath as NSIndexPath).row]
@@ -81,10 +82,8 @@ class ListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let student = Student.sharedInstance().studentLocationsList[(indexPath as NSIndexPath).row]
         let browser = UIApplication.shared
-        if let url = URL(string: student.mediaURL!) {
+        if let url = URL(string: student.linkURL!) {
             browser.open(url, options: [:], completionHandler: nil)
-        } else {
-            showErrorAlert(message: "URL not valid")
         }
     }
     

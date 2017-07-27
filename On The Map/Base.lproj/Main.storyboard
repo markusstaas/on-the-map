@@ -102,11 +102,11 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="APr-ZF-UaG" id="tfN-Bt-udt">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="icT-Je-FKL">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -162,8 +162,16 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" id="5tm-70-ssJ"/>
-                            <barButtonItem title="Item" id="6uh-Eh-9gg"/>
+                            <barButtonItem image="icon_addpin" id="5tm-70-ssJ">
+                                <connections>
+                                    <action selector="addStudent:" destination="htP-6q-jUT" id="WlP-Iv-wZf"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="icon_refresh" id="6uh-Eh-9gg">
+                                <connections>
+                                    <action selector="refreshView:" destination="htP-6q-jUT" id="yZG-c7-VDe"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -192,11 +200,11 @@
             </objects>
             <point key="canvasLocation" x="119" y="75"/>
         </scene>
-        <!--Item 1-->
+        <!--Map-->
         <scene sceneID="0Ve-LA-Ec3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vUd-Wb-Acq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="9s3-Tq-MwT"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-deselected" id="9s3-Tq-MwT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bnr-PT-OgC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -211,11 +219,11 @@
             </objects>
             <point key="canvasLocation" x="1164" y="-297.30134932533736"/>
         </scene>
-        <!--Item 2-->
+        <!--List-->
         <scene sceneID="c4b-Pc-0dt">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hNO-jU-2qC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 2" id="0h5-xb-swc"/>
+                    <tabBarItem key="tabBarItem" title="List" image="icon_listview-deselected" id="0h5-xb-swc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PWD-kH-TJ6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -232,6 +240,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_addpin" width="24" height="24"/>
+        <image name="icon_listview-deselected" width="75" height="50"/>
+        <image name="icon_mapview-deselected" width="75" height="50"/>
+        <image name="icon_refresh" width="24" height="24"/>
         <image name="logo-u" width="62" height="62"/>
     </resources>
 </document>

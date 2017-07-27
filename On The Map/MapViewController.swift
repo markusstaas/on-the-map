@@ -15,17 +15,26 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     let reachability = Reachability()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        getMapLocations()
+    @IBAction func refreshView(_ sender: Any) {
+        areWeOnline()
+        for annotation: MKAnnotation in mapView.annotations{
+            mapView.removeAnnotation(annotation)
+        }
+        getMapData()
+        
+    }
+    @IBAction func addStudent(_ sender: Any) {
+        
     }
     
-    func areWeOnline() -> Bool{
-        if (reachability?.isReachable)! {
-            return true
-        }else{
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getMapData()
+    }
+    
+    func areWeOnline() {
+        if !(reachability?.isReachable)! {
             showErrorAlert(message: "Could not connect to the Internet, please connect to the Internet to use this app")
-            return false
         }
     }
     
@@ -55,7 +64,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    func getMapLocations(){
+    func getMapData(){
         LoadingIndicator.sharedInstance().startIndicator(self)
         ParseClient.sharedInstance().getStudentLocations(){(success, results, errorString) in
             
@@ -68,45 +77,57 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 guard (results != nil) else {
                     self.showErrorAlert(message: errorString!)
                     return
-                }
-                self.setMapLocations()
             }
-        }
+                self.setMapData()
+            }
+    }
     }
     
-    func setMapLocations(){
+    func setMapData(){
         var annotations = [MKPointAnnotation]()
         for location in Student.sharedInstance().studentLocationsList{
             let lat = CLLocationDegrees(location.latitude! as Double)
             let long = CLLocationDegrees(location.longitude! as Double)
-            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            
+            let coordinates = CLLocationCoordinate2D(latitude: lat, longitude: long)
             let firstName = location.firstName! as String
             let lastName = location.lastName! as String
-            let mediaURL = location.mediaURL! as String
-            
+            let linkURL = location.linkURL! as String
             let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
+            annotation.coordinate = coordinates
             annotation.title = "\(firstName) \(lastName)"
-            annotation.subtitle = mediaURL
+            annotation.subtitle = linkURL
             annotations.append(annotation)
         }
         self.mapView.delegate = self
         self.mapView.addAnnotations(annotations)
+        
+        
+    }
+
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseID = "identifier"
+        var showPin = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? MKPinAnnotationView
+        if (showPin == nil) {
+            showPin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+            showPin!.canShowCallout = true
+            showPin!.image = UIImage(named: "icon_pin")
+            showPin!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        } else {
+            showPin!.annotation = annotation
+            }
+        return showPin
     }
     
-
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let reuseID = "pin"
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? MKPinAnnotationView
-        if (pinView == nil) {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
-            pinView!.canShowCallout = true
-            pinView!.pinTintColor = .red
-        } else {
-            pinView!.annotation = annotation
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.shared
+            let linkURL = view.annotation?.subtitle!
+            if let url = URL(string: linkURL!){
+                app.open(url, options: [:], completionHandler: nil)
+            }
         }
-        return pinView
     }
     
 }

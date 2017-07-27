@@ -39,7 +39,7 @@ extension ParseClient {
                 return
             }
             
-            Student.sharedInstance().studentLocationsList = Student.studentLocationsFromJSON(resultDictionaries)
+            Student.sharedInstance().studentLocationsList = Student.studentInformationFromData(resultDictionaries)
             completionHandlerForGetStudentLocations(true, Student.sharedInstance().studentLocationsList, error)
         }
     }

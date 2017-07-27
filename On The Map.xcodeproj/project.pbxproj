@@ -20,7 +20,7 @@
 		28ABF2991F2851F700BDB857 /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABF2981F2851F700BDB857 /* ParseConstants.swift */; };
 		28ABF29B1F28523000BDB857 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABF29A1F28523000BDB857 /* ParseClient.swift */; };
 		28ABF29D1F2852C500BDB857 /* ParseConvinience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABF29C1F2852C500BDB857 /* ParseConvinience.swift */; };
-		28ABF29F1F2852FB00BDB857 /* StudentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABF29E1F2852FB00BDB857 /* StudentLocations.swift */; };
+		28ABF29F1F2852FB00BDB857 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABF29E1F2852FB00BDB857 /* StudentInformation.swift */; };
 		28D7F83E1F21CAC5004B4393 /* UdaConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D7F83D1F21CAC5004B4393 /* UdaConstants.swift */; };
 		28D7F8401F21CDA6004B4393 /* UdaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D7F83F1F21CDA6004B4393 /* UdaClient.swift */; };
 		97CC75BE0EF160F7D211FB08 /* Pods_On_The_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCABEAA3C7DF27096E50BDA /* Pods_On_The_Map.framework */; };
@@ -43,7 +43,7 @@
 		28ABF2981F2851F700BDB857 /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
 		28ABF29A1F28523000BDB857 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		28ABF29C1F2852C500BDB857 /* ParseConvinience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConvinience.swift; sourceTree = "<group>"; };
-		28ABF29E1F2852FB00BDB857 /* StudentLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocations.swift; sourceTree = "<group>"; };
+		28ABF29E1F2852FB00BDB857 /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		28D7F8381F21B909004B4393 /* On The Map.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "On The Map.entitlements"; sourceTree = "<group>"; };
 		28D7F83D1F21CAC5004B4393 /* UdaConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdaConstants.swift; sourceTree = "<group>"; };
 		28D7F83F1F21CDA6004B4393 /* UdaClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdaClient.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 				28ABF2981F2851F700BDB857 /* ParseConstants.swift */,
 				28ABF29A1F28523000BDB857 /* ParseClient.swift */,
 				28ABF29C1F2852C500BDB857 /* ParseConvinience.swift */,
-				28ABF29E1F2852FB00BDB857 /* StudentLocations.swift */,
+				28ABF29E1F2852FB00BDB857 /* StudentInformation.swift */,
 			);
 			name = Parse;
 			sourceTree = "<group>";
@@ -315,7 +315,7 @@
 				28ABF29D1F2852C500BDB857 /* ParseConvinience.swift in Sources */,
 				285CB6011F25D49300C3C50A /* ListViewController.swift in Sources */,
 				28ABF29B1F28523000BDB857 /* ParseClient.swift in Sources */,
-				28ABF29F1F2852FB00BDB857 /* StudentLocations.swift in Sources */,
+				28ABF29F1F2852FB00BDB857 /* StudentInformation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
