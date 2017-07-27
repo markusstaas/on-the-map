@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28369F9D1F29A611003D2102 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2894A8491F1F528300DDE940 /* Assets.xcassets */; };
 		285CB5FF1F25D48200C3C50A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285CB5FE1F25D48200C3C50A /* MapViewController.swift */; };
 		285CB6011F25D49300C3C50A /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285CB6001F25D49300C3C50A /* ListViewController.swift */; };
 		287F8F451F273D160085967C /* UdaConvinience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287F8F441F273D160085967C /* UdaConvinience.swift */; };
@@ -15,7 +16,6 @@
 		2894A8431F1F528300DDE940 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894A8421F1F528300DDE940 /* AppDelegate.swift */; };
 		2894A8451F1F528300DDE940 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894A8441F1F528300DDE940 /* LogInViewController.swift */; };
 		2894A8481F1F528300DDE940 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2894A8461F1F528300DDE940 /* Main.storyboard */; };
-		2894A84A1F1F528300DDE940 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2894A8491F1F528300DDE940 /* Assets.xcassets */; };
 		2894A84D1F1F528300DDE940 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2894A84B1F1F528300DDE940 /* LaunchScreen.storyboard */; };
 		28ABF2991F2851F700BDB857 /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABF2981F2851F700BDB857 /* ParseConstants.swift */; };
 		28ABF29B1F28523000BDB857 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABF29A1F28523000BDB857 /* ParseClient.swift */; };
@@ -200,6 +200,9 @@
 		2894A8371F1F528300DDE940 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					icon_pin,
+				);
 				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Markus Staas";
@@ -240,7 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2894A84D1F1F528300DDE940 /* LaunchScreen.storyboard in Resources */,
-				2894A84A1F1F528300DDE940 /* Assets.xcassets in Resources */,
+				28369F9D1F29A611003D2102 /* Assets.xcassets in Resources */,
 				2894A8481F1F528300DDE940 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

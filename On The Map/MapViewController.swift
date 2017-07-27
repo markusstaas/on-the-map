@@ -8,16 +8,26 @@
 
 import UIKit
 import MapKit
+import ReachabilitySwift
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
+    @IBOutlet weak var mapView: MKMapView!
+    let reachability = Reachability()
     
-    @IBOutlet weak var mapKitView: MKMapView!
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        getMapLocations()
     }
     
+    func areWeOnline() -> Bool{
+        if (reachability?.isReachable)! {
+            return true
+        }else{
+            showErrorAlert(message: "Could not connect to the Internet, please connect to the Internet to use this app")
+            return false
+        }
+    }
     
     @IBAction func logOutButton(_ sender: Any) {
         LoadingIndicator.sharedInstance().startIndicator(self)
@@ -44,10 +54,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.present(controller, animated: true, completion: nil)
     }
     
-    // MARK: Map functions
     
     func getMapLocations(){
-        
         LoadingIndicator.sharedInstance().startIndicator(self)
         ParseClient.sharedInstance().getStudentLocations(){(success, results, errorString) in
             
@@ -72,21 +80,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             let lat = CLLocationDegrees(location.latitude! as Double)
             let long = CLLocationDegrees(location.longitude! as Double)
             let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            
             let firstName = location.firstName! as String
             let lastName = location.lastName! as String
             let mediaURL = location.mediaURL! as String
+            
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             annotation.title = "\(firstName) \(lastName)"
             annotation.subtitle = mediaURL
-            
             annotations.append(annotation)
         }
-        self.mapKitView.delegate = self
-        self.mapKitView.addAnnotations(annotations)
+        self.mapView.delegate = self
+        self.mapView.addAnnotations(annotations)
     }
-    // MARK: MapView Delegate
     
+
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseID = "pin"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? MKPinAnnotationView
@@ -94,25 +103,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             pinView!.canShowCallout = true
             pinView!.pinTintColor = .red
-            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         } else {
             pinView!.annotation = annotation
         }
         return pinView
     }
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
-        if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.shared
-            let mediaURL = view.annotation?.subtitle!
-            if let url = URL(string: mediaURL!){
-                app.open(url, options: [:], completionHandler: nil)
-            } else {
-                showErrorAlert(message: "Not a valid URL")
-            }
-        }
-    }
-    
-
 }

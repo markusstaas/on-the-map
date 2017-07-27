@@ -93,28 +93,38 @@
         <scene sceneID="GfY-Y1-Zkt">
             <objects>
                 <viewController storyboardIdentifier="ListViewController" id="7dO-Wg-6zt" customClass="ListViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="TaD-Mw-ILW"/>
-                        <viewControllerLayoutGuide type="bottom" id="a5f-4L-WKE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="nyk-jj-Cgz">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="5FD-In-Qw8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ygd-x5-4OF">
-                                <rect key="frame" x="173.5" y="323" width="28" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Ygd-x5-4OF" firstAttribute="centerY" secondItem="nyk-jj-Cgz" secondAttribute="centerY" id="8e3-8e-YDz"/>
-                            <constraint firstItem="Ygd-x5-4OF" firstAttribute="centerX" secondItem="nyk-jj-Cgz" secondAttribute="centerX" id="iJK-GO-z5R"/>
-                        </constraints>
-                    </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="studentDetail" textLabel="icT-Je-FKL" style="IBUITableViewCellStyleDefault" id="APr-ZF-UaG">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="APr-ZF-UaG" id="tfN-Bt-udt">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="icT-Je-FKL">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7dO-Wg-6zt" id="kLI-4w-3g1"/>
+                            <outlet property="delegate" destination="7dO-Wg-6zt" id="2OP-8a-A9O"/>
+                        </connections>
+                    </tableView>
                     <navigationItem key="navigationItem" id="Quw-62-OEL"/>
+                    <connections>
+                        <outlet property="detailTableView" destination="5FD-In-Qw8" id="kMm-li-96T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hfd-ke-CM0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -157,7 +167,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="mapKitView" destination="5jW-zQ-hs3" id="lqa-Ig-IaK"/>
+                        <outlet property="mapView" destination="5jW-zQ-hs3" id="ayC-Pj-yVx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T0V-Te-0NE" userLabel="First Responder" sceneMemberID="firstResponder"/>
