@@ -23,7 +23,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         if (error == nil) {
             FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (connection, result, err) in
                 if err != nil {
-                    self.showErrorAlert(message: "\(err)")
+                    self.showErrorAlert(message: "\(String(describing: err))")
                     return
                 }
 
@@ -118,7 +118,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile"], from: self){
             (result, err) in
             if err != nil {
-                self.showErrorAlert(message: "\(err)")
+                self.showErrorAlert(message: "\(String(describing: err))")
                 return
             }
             

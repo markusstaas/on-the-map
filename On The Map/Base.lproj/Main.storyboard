@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -102,11 +102,11 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="APr-ZF-UaG" id="tfN-Bt-udt">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="icT-Je-FKL">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -264,7 +264,7 @@
         <!--Confirm Student Location View Controller-->
         <scene sceneID="kKC-W1-G0d">
             <objects>
-                <viewController storyboardIdentifier="ConfirmStudentLocationVC" id="w4y-Pk-1Nd" customClass="ConfirmStudentLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="w4y-Pk-1Nd" customClass="ConfirmStudentLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="x5h-iI-6ch"/>
                         <viewControllerLayoutGuide type="bottom" id="SL1-ai-Kh3"/>
@@ -274,40 +274,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="jFn-sc-B9P">
-                                <rect key="frame" x="0.0" y="64" width="375" height="348"/>
+                                <rect key="frame" x="20" y="64" width="335" height="396"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Vv1-ko-ivy">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="300"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="300" id="yYq-hL-ncC"/>
                                         </constraints>
                                     </mapView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="o9N-W5-yZU">
-                                        <rect key="frame" x="119" y="318" width="137" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aa4-aT-sLb">
-                                                <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
-                                                <state key="normal" title="Cancel"/>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8j-Ed-XAG">
-                                                <rect key="frame" x="88" y="0.0" width="49" height="30"/>
-                                                <state key="normal" title="Submit"/>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8j-Ed-XAG">
+                                        <rect key="frame" x="0.0" y="318" width="335" height="30"/>
+                                        <color key="backgroundColor" red="0.00166011462" green="0.68771278859999996" blue="0.87531644109999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Submit">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aa4-aT-sLb">
+                                        <rect key="frame" x="0.0" y="366" width="335" height="30"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="0.14074643780000001" green="0.14074643780000001" blue="0.14074643780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="aa4-aT-sLb" firstAttribute="leading" secondItem="jFn-sc-B9P" secondAttribute="leading" id="9Nf-GM-RSy"/>
+                                    <constraint firstAttribute="trailing" secondItem="aa4-aT-sLb" secondAttribute="trailing" id="GU4-nP-OlF"/>
                                     <constraint firstItem="Vv1-ko-ivy" firstAttribute="top" secondItem="jFn-sc-B9P" secondAttribute="top" id="Gb0-kq-qbh"/>
                                     <constraint firstAttribute="trailing" secondItem="Vv1-ko-ivy" secondAttribute="trailing" id="SP4-LE-XRV"/>
                                     <constraint firstItem="Vv1-ko-ivy" firstAttribute="leading" secondItem="jFn-sc-B9P" secondAttribute="leading" id="SQV-pq-O72"/>
+                                    <constraint firstItem="t8j-Ed-XAG" firstAttribute="leading" secondItem="jFn-sc-B9P" secondAttribute="leading" id="Ulk-G4-06m"/>
+                                    <constraint firstAttribute="trailing" secondItem="t8j-Ed-XAG" secondAttribute="trailing" id="cdx-IU-Vjf"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jFn-sc-B9P" firstAttribute="top" secondItem="x5h-iI-6ch" secondAttribute="bottom" id="SuZ-I8-WNJ"/>
-                            <constraint firstAttribute="trailing" secondItem="jFn-sc-B9P" secondAttribute="trailing" id="dsx-us-dJI"/>
-                            <constraint firstItem="jFn-sc-B9P" firstAttribute="leading" secondItem="GVn-Lq-dvL" secondAttribute="leading" id="lfP-si-tam"/>
+                            <constraint firstAttribute="trailing" secondItem="jFn-sc-B9P" secondAttribute="trailing" constant="20" symbolic="YES" id="dsx-us-dJI"/>
+                            <constraint firstItem="jFn-sc-B9P" firstAttribute="leading" secondItem="GVn-Lq-dvL" secondAttribute="leading" constant="20" symbolic="YES" id="lfP-si-tam"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Q6k-L8-YG4">
@@ -317,6 +322,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="Vv1-ko-ivy" id="ueU-ZV-A3n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKa-MD-lGh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -381,7 +389,7 @@
         <!--Navigation Controller-->
         <scene sceneID="tb9-RB-sae">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dLR-5s-E19" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ConfirmStudentLocationVC" automaticallyAdjustsScrollViewInsets="NO" id="dLR-5s-E19" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yrc-xv-g6n">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
