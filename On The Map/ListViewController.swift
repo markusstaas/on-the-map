@@ -7,42 +7,43 @@
 //
 
 import UIKit
-import ReachabilitySwift
 
 class ListViewController: UITableViewController {
     
     
     @IBOutlet var detailTableView: UITableView!
-    let reachability = Reachability()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.automaticallyAdjustsScrollViewInsets = false
         getLocationsForTableView()
 
-        // Do any additional setup after loading the view.
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        Helper.areWeOnline()
     }
     
-    func areWeOnline() -> Bool{
-        if (reachability?.isReachable)! {
-            return true
-        }else{
-            showErrorAlert(message: "Could not connect to the Internet, please connect to the Internet to use this app")
-            return false
+    @IBAction func refreshView(_ sender: Any) {
+        Helper.areWeOnline()
+        getLocationsForTableView()
+       
+    }
+    
+    @IBAction func logOutButton(_ sender: Any) {
+        LoadingIndicator.sharedInstance().startIndicator(self)
+        UdaClient.sharedInstance().logoutSessionWithUdacity(){(success, errorString) in
+            
+            performUIUpdatesOnMain {
+                LoadingIndicator.sharedInstance().stopIndicator(self)
+                if success{
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    Helper.showErrorAlert(message: errorString!)
+                }
+            }
         }
     }
-    
-    func showErrorAlert(message: String, dismissButtonTitle: String = "Cool") {
-        let controller = UIAlertController(title: "Error Message:", message: message, preferredStyle: .alert)
-        
-        controller.addAction(UIAlertAction(title: dismissButtonTitle, style: .default) { (action: UIAlertAction!) in
-            controller.dismiss(animated: true, completion: nil)
-        })
-        
-        self.present(controller, animated: true, completion: nil)
-    }
-    
-    // MARK: Map Functions For Table
     
     func getLocationsForTableView(){
         
@@ -53,11 +54,11 @@ class ListViewController: UITableViewController {
             performUIUpdatesOnMain {
                 LoadingIndicator.sharedInstance().stopIndicator(self)
                 guard (success == true) else {
-                    self.showErrorAlert(message: errorString!)
+                    Helper.showErrorAlert(message: errorString!)
                     return
                 }
                 guard (results != nil) else {
-                   self.showErrorAlert(message: errorString!)
+                   Helper.showErrorAlert(message: errorString!)
                     return
                 }
                 self.detailTableView.reloadData()

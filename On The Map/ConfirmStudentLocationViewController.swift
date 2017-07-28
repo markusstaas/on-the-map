@@ -13,30 +13,66 @@ import MapKit
 class ConfirmStudentLocationViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    
+    @IBOutlet weak var submitButton: UIButton!
     var userAddress: String = ""
     var userURL: String = ""
+    var userLongitude: Double = 0.0
+    var userLatitude: Double = 0.0
     
     @IBAction func backButt(_ sender: Any) {
             self.dismiss(animated: true, completion: nil)
     }
-
+    
+    @IBAction func submitButt(_ sender: Any) {
+       Helper.areWeOnline()
+        LoadingIndicator.sharedInstance().startIndicator(self)
+            ParseClient.sharedInstance().postStudentInformation(mapString: userAddress, mediaURL: userURL, latitude: userLatitude, longitude: userLongitude) { (success, errorString) in
+                
+                performUIUpdatesOnMain {
+                    LoadingIndicator.sharedInstance().stopIndicator(self)
+                    if success {
+                        
+                        Helper.showErrorAlert(message: "Data successfully submitted")
+                        
+                        let listVC = self.storyboard?.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
+                        
+                        self.navigationController?.pushViewController(listVC, animated: true)
+                    } else {
+                        Helper.showErrorAlert(message: "Update error: \(String(describing: errorString))")
+                    }
+                }
+            }
+       
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         mapPreview()
-  
             
         }
+    override func viewDidAppear(_ animated: Bool) {
+        Helper.areWeOnline()
+    }
+    
     
     func mapPreview(){
         let geoCoder = CLGeocoder()
+        LoadingIndicator.sharedInstance().startIndicator(self)
         geoCoder.geocodeAddressString(userAddress) { (placemarks, error) in
             guard
                 let placemarks = placemarks,
                 let userLocation = placemarks.first?.location?.coordinate
                 else {
-                    self.showErrorAlert(message: "The location could not be found, please go back and try again.")
+                    LoadingIndicator.sharedInstance().stopIndicator(self)
+                Helper.showErrorAlert(message: "The location could not be found, please go back and try again.")
+                self.submitButton.isEnabled = false
+                self.submitButton.alpha = 0.25
                     return
             }
+            self.userLatitude = userLocation.latitude
+            self.userLongitude = userLocation.longitude
             self.mapView.mapType = MKMapType.standard
             let span = MKCoordinateSpanMake(0.05, 0.05)
             let region = MKCoordinateRegion(center: userLocation, span: span)
@@ -46,19 +82,8 @@ class ConfirmStudentLocationViewController: UIViewController, MKMapViewDelegate,
             annotation.title = "URL"
             annotation.subtitle = self.userURL
             self.mapView.addAnnotation(annotation)
+            LoadingIndicator.sharedInstance().stopIndicator(self)
         }
         
     }
-    func showErrorAlert(message: String, dismissButtonTitle: String = "Cool") {
-        let controller = UIAlertController(title: "Error Message:", message: message, preferredStyle: .alert)
-        
-        controller.addAction(UIAlertAction(title: dismissButtonTitle, style: .default) { (action: UIAlertAction!) in
-            controller.dismiss(animated: true, completion: nil)
-        })
-        
-        self.present(controller, animated: true, completion: nil)
-    }
-    
-    
-    
 }

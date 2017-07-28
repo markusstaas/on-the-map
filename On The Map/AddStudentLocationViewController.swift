@@ -20,18 +20,20 @@ class AddStudentLocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        Helper.areWeOnline()
+    }
     
     @IBAction func continueButt(_ sender: Any) {
-        
+        Helper.areWeOnline()
         guard userAddressField.text?.isEmpty == false else {
-            showErrorAlert(message: "Please enter your address")
+            Helper.showErrorAlert(message: "Please enter your address")
             return
         }
         guard userURLField.text?.isEmpty == false else {
-            showErrorAlert(message: "Please enter your URL")
+            Helper.showErrorAlert(message: "Please enter your URL")
             return
         }
-        
         
         
         let ConfirmStudentVC = storyboard?.instantiateViewController(withIdentifier: "ConfirmStudentLocationVC") as! ConfirmStudentLocationViewController
@@ -39,17 +41,8 @@ class AddStudentLocationViewController: UIViewController {
         ConfirmStudentVC.userURL = userURLField.text!
         navigationController?.pushViewController(ConfirmStudentVC, animated: true)
         
-        
     }
-    func showErrorAlert(message: String, dismissButtonTitle: String = "Cool") {
-        let controller = UIAlertController(title: "Error Message:", message: message, preferredStyle: .alert)
-        
-        controller.addAction(UIAlertAction(title: dismissButtonTitle, style: .default) { (action: UIAlertAction!) in
-            controller.dismiss(animated: true, completion: nil)
-        })
-        
-        self.present(controller, animated: true, completion: nil)
-    }
+
     
 
 }

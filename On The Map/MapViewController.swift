@@ -8,15 +8,13 @@
 
 import UIKit
 import MapKit
-import ReachabilitySwift
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    let reachability = Reachability()
     
     @IBAction func refreshView(_ sender: Any) {
-        areWeOnline()
+        Helper.areWeOnline()
         for annotation: MKAnnotation in mapView.annotations{
             mapView.removeAnnotation(annotation)
         }
@@ -31,12 +29,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         getMapData()
     }
-    
-    func areWeOnline() {
-        if !(reachability?.isReachable)! {
-            showErrorAlert(message: "Could not connect to the Internet, please connect to the Internet to use this app")
-        }
+    override func viewDidAppear(_ animated: Bool) {
+        Helper.areWeOnline()
     }
+    
     
     @IBAction func logOutButton(_ sender: Any) {
         LoadingIndicator.sharedInstance().startIndicator(self)
@@ -47,23 +43,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 if success{
                     self.dismiss(animated: true, completion: nil)
                 } else {
-                    self.showErrorAlert(message: errorString!)
+                    Helper.showErrorAlert(message: errorString!)
                 }
             }
         }
     }
     
-    func showErrorAlert(message: String, dismissButtonTitle: String = "Cool") {
-        let controller = UIAlertController(title: "Error Message:", message: message, preferredStyle: .alert)
-        
-        controller.addAction(UIAlertAction(title: dismissButtonTitle, style: .default) { (action: UIAlertAction!) in
-            controller.dismiss(animated: true, completion: nil)
-        })
-        
-        self.present(controller, animated: true, completion: nil)
-    }
-    
-    
+ 
     func getMapData(){
         LoadingIndicator.sharedInstance().startIndicator(self)
         ParseClient.sharedInstance().getStudentLocations(){(success, results, errorString) in
@@ -71,11 +57,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             performUIUpdatesOnMain {
                 LoadingIndicator.sharedInstance().stopIndicator(self)
                 guard (success == true) else {
-                    self.showErrorAlert(message: errorString!)
+                    Helper.showErrorAlert(message: errorString!)
                     return
                 }
                 guard (results != nil) else {
-                    self.showErrorAlert(message: errorString!)
+                    Helper.showErrorAlert(message: errorString!)
                     return
             }
                 self.setMapData()

@@ -121,7 +121,25 @@
                             <outlet property="delegate" destination="7dO-Wg-6zt" id="2OP-8a-A9O"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Quw-62-OEL"/>
+                    <navigationItem key="navigationItem" id="Quw-62-OEL">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="h0c-Io-Tzf">
+                            <connections>
+                                <action selector="logOutButton:" destination="7dO-Wg-6zt" id="m1D-UH-eJN"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="icon_addpin" id="wHt-3t-3EY">
+                                <connections>
+                                    <segue destination="aYe-yZ-gPI" kind="show" id="Tvu-cE-WRw"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="icon_refresh" id="C8g-bb-Ext">
+                                <connections>
+                                    <action selector="refreshView:" destination="7dO-Wg-6zt" id="7q0-47-ohE"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="detailTableView" destination="5FD-In-Qw8" id="kMm-li-96T"/>
                     </connections>
@@ -264,7 +282,7 @@
         <!--Confirm Student Location View Controller-->
         <scene sceneID="kKC-W1-G0d">
             <objects>
-                <viewController id="w4y-Pk-1Nd" customClass="ConfirmStudentLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConfirmStudentLocationVC" id="w4y-Pk-1Nd" customClass="ConfirmStudentLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="x5h-iI-6ch"/>
                         <viewControllerLayoutGuide type="bottom" id="SL1-ai-Kh3"/>
@@ -288,6 +306,9 @@
                                         <state key="normal" title="Submit">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="submitButt:" destination="w4y-Pk-1Nd" eventType="touchUpInside" id="7cv-5V-sM3"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aa4-aT-sLb">
                                         <rect key="frame" x="0.0" y="366" width="335" height="30"/>
@@ -324,6 +345,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="Vv1-ko-ivy" id="ueU-ZV-A3n"/>
+                        <outlet property="submitButton" destination="t8j-Ed-XAG" id="kce-dV-a5V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKa-MD-lGh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -387,24 +409,6 @@
             <point key="canvasLocation" x="1164" y="419.64017991004499"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="tb9-RB-sae">
-            <objects>
-                <navigationController storyboardIdentifier="ConfirmStudentLocationVC" automaticallyAdjustsScrollViewInsets="NO" id="dLR-5s-E19" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yrc-xv-g6n">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="w4y-Pk-1Nd" kind="relationship" relationship="rootViewController" id="Aog-aG-Io6"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rh4-FN-w5w" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6076" y="73.313343328335833"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="Izn-nq-giB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aYe-yZ-gPI" sceneMemberID="viewController">
@@ -432,6 +436,7 @@
         <image name="logo-u" width="62" height="62"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Tvu-cE-WRw"/>
         <segue reference="jKj-8n-q2e"/>
     </inferredMetricsTieBreakers>
 </document>

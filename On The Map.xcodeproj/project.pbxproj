@@ -25,6 +25,7 @@
 		28ABF29F1F2852FB00BDB857 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABF29E1F2852FB00BDB857 /* StudentInformation.swift */; };
 		28D7F83E1F21CAC5004B4393 /* UdaConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D7F83D1F21CAC5004B4393 /* UdaConstants.swift */; };
 		28D7F8401F21CDA6004B4393 /* UdaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D7F83F1F21CDA6004B4393 /* UdaClient.swift */; };
+		28DE64E41F2B25CC00D6DA1D /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE64E31F2B25CC00D6DA1D /* Helper.swift */; };
 		97CC75BE0EF160F7D211FB08 /* Pods_On_The_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCABEAA3C7DF27096E50BDA /* Pods_On_The_Map.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		28D7F8381F21B909004B4393 /* On The Map.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "On The Map.entitlements"; sourceTree = "<group>"; };
 		28D7F83D1F21CAC5004B4393 /* UdaConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdaConstants.swift; sourceTree = "<group>"; };
 		28D7F83F1F21CDA6004B4393 /* UdaClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdaClient.swift; sourceTree = "<group>"; };
+		28DE64E31F2B25CC00D6DA1D /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		DFCABEAA3C7DF27096E50BDA /* Pods_On_The_Map.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_On_The_Map.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E38ADBB2B1500A1F9FDC604B /* Pods-On The Map.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-On The Map.release.xcconfig"; path = "Pods/Target Support Files/Pods-On The Map/Pods-On The Map.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +137,7 @@
 				2894A8461F1F528300DDE940 /* Main.storyboard */,
 				2894A8491F1F528300DDE940 /* Assets.xcassets */,
 				287F8F461F27420A0085967C /* LoadingIndicator.swift */,
+				28DE64E31F2B25CC00D6DA1D /* Helper.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				28369FA11F29D54B003D2102 /* ConfirmStudentLocationViewController.swift in Sources */,
 				287F8F451F273D160085967C /* UdaConvinience.swift in Sources */,
 				28D7F83E1F21CAC5004B4393 /* UdaConstants.swift in Sources */,
+				28DE64E41F2B25CC00D6DA1D /* Helper.swift in Sources */,
 				2894A8431F1F528300DDE940 /* AppDelegate.swift in Sources */,
 				28D7F8401F21CDA6004B4393 /* UdaClient.swift in Sources */,
 				288447691F235CED009904A0 /* GCDBlackBox.swift in Sources */,
