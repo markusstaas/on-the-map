@@ -38,7 +38,6 @@ extension ParseClient {
                 completionHandlerForGetStudentLocations(false, nil, "Could not parse the data for StudentInformation")
                 return
             }
-            
             Student.sharedInstance().studentLocationsList = Student.studentInformationFromData(resultDictionaries)
             completionHandlerForGetStudentLocations(true, Student.sharedInstance().studentLocationsList, error)
         }

@@ -143,7 +143,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5jW-zQ-hs3">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -165,7 +165,7 @@
                             <barButtonItem image="icon_addpin" id="5tm-70-ssJ">
                                 <connections>
                                     <action selector="addStudent:" destination="htP-6q-jUT" id="WlP-Iv-wZf"/>
-                                    <segue destination="cEL-Js-Hyb" kind="show" id="vQd-hf-2zD"/>
+                                    <segue destination="aYe-yZ-gPI" kind="show" id="vQd-hf-2zD"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="icon_refresh" id="6uh-Eh-9gg">
@@ -217,14 +217,22 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wro-wr-r8i">
-                                        <rect key="frame" x="140.5" y="170.5" width="62" height="30"/>
-                                        <state key="normal" title="Continue"/>
+                                        <rect key="frame" x="0.0" y="170.5" width="343" height="30"/>
+                                        <color key="backgroundColor" red="0.00166011462" green="0.68771278859999996" blue="0.87531644109999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Continue">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="continueButt:" destination="cEL-Js-Hyb" eventType="touchUpInside" id="wyT-8r-5W6"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="tdN-lT-KDG" firstAttribute="leading" secondItem="1R1-qi-cw0" secondAttribute="leading" id="39W-o0-A9t"/>
                                     <constraint firstAttribute="trailing" secondItem="8Lw-is-xxb" secondAttribute="trailing" id="3EO-Hl-3DG"/>
                                     <constraint firstAttribute="trailing" secondItem="tdN-lT-KDG" secondAttribute="trailing" id="KE5-gs-UDI"/>
+                                    <constraint firstItem="Wro-wr-r8i" firstAttribute="leading" secondItem="1R1-qi-cw0" secondAttribute="leading" id="Oxa-1R-wEc"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wro-wr-r8i" secondAttribute="trailing" id="k0h-0Y-BEW"/>
                                     <constraint firstItem="8Lw-is-xxb" firstAttribute="leading" secondItem="1R1-qi-cw0" secondAttribute="leading" id="tSx-RJ-Tu9"/>
                                 </constraints>
                             </stackView>
@@ -239,19 +247,24 @@
                     <navigationItem key="navigationItem" id="2kU-PV-J1b">
                         <barButtonItem key="leftBarButtonItem" image="icon_back-arrow" id="P0T-XS-yBS">
                             <connections>
+                                <action selector="backButt:" destination="cEL-Js-Hyb" id="M6G-jj-2qg"/>
                                 <segue destination="htP-6q-jUT" kind="show" id="jKj-8n-q2e"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="userAddressField" destination="tdN-lT-KDG" id="iYU-aI-2JI"/>
+                        <outlet property="userURLField" destination="8Lw-is-xxb" id="HcK-dU-ifm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Imd-Qo-Qub" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4112.8000000000002" y="74.212893553223395"/>
+            <point key="canvasLocation" x="5052" y="74.212893553223395"/>
         </scene>
         <!--Confirm Student Location View Controller-->
         <scene sceneID="kKC-W1-G0d">
             <objects>
-                <viewController id="w4y-Pk-1Nd" customClass="ConfirmStudentLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConfirmStudentLocationVC" id="w4y-Pk-1Nd" customClass="ConfirmStudentLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="x5h-iI-6ch"/>
                         <viewControllerLayoutGuide type="bottom" id="SL1-ai-Kh3"/>
@@ -260,52 +273,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Vv1-ko-ivy">
-                                <rect key="frame" x="0.0" y="64" width="375" height="400"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="FFt-HX-DJd">
-                                <rect key="frame" x="107" y="517" width="160" height="81"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="jFn-sc-B9P">
+                                <rect key="frame" x="0.0" y="64" width="375" height="348"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2by-wG-3pl">
-                                        <rect key="frame" x="59" y="0.0" width="42" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="63" translatesAutoresizingMaskIntoConstraints="NO" id="Sl0-Vk-Yct">
-                                        <rect key="frame" x="0.0" y="50.5" width="160" height="30"/>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Vv1-ko-ivy">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="300" id="yYq-hL-ncC"/>
+                                        </constraints>
+                                    </mapView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="o9N-W5-yZU">
+                                        <rect key="frame" x="119" y="318" width="137" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aa4-aT-sLb">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aa4-aT-sLb">
                                                 <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
                                                 <state key="normal" title="Cancel"/>
-                                                <connections>
-                                                    <segue destination="htP-6q-jUT" kind="show" id="FQq-DX-a9w"/>
-                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8j-Ed-XAG">
-                                                <rect key="frame" x="111" y="0.0" width="49" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8j-Ed-XAG">
+                                                <rect key="frame" x="88" y="0.0" width="49" height="30"/>
                                                 <state key="normal" title="Submit"/>
                                             </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="Vv1-ko-ivy" firstAttribute="top" secondItem="jFn-sc-B9P" secondAttribute="top" id="Gb0-kq-qbh"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vv1-ko-ivy" secondAttribute="trailing" id="SP4-LE-XRV"/>
+                                    <constraint firstItem="Vv1-ko-ivy" firstAttribute="leading" secondItem="jFn-sc-B9P" secondAttribute="leading" id="SQV-pq-O72"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jFn-sc-B9P" firstAttribute="top" secondItem="x5h-iI-6ch" secondAttribute="bottom" id="SuZ-I8-WNJ"/>
+                            <constraint firstAttribute="trailing" secondItem="jFn-sc-B9P" secondAttribute="trailing" id="dsx-us-dJI"/>
+                            <constraint firstItem="jFn-sc-B9P" firstAttribute="leading" secondItem="GVn-Lq-dvL" secondAttribute="leading" id="lfP-si-tam"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Q6k-L8-YG4">
                         <barButtonItem key="leftBarButtonItem" image="icon_back-arrow" id="jGN-Ir-s2z">
                             <connections>
-                                <segue destination="cEL-Js-Hyb" kind="show" id="ix5-GD-VV1"/>
+                                <action selector="backButt:" destination="w4y-Pk-1Nd" id="YFJ-Qb-RKh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKa-MD-lGh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5988" y="74.212893553223395"/>
+            <point key="canvasLocation" x="7015.1999999999998" y="73.313343328335833"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="NVV-fq-bUp">
@@ -364,40 +379,40 @@
             <point key="canvasLocation" x="1164" y="419.64017991004499"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="1v0-3R-8dT">
+        <scene sceneID="tb9-RB-sae">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oqT-p7-ucm" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dLR-5s-E19" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lSm-4W-nea">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yrc-xv-g6n">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="cEL-Js-Hyb" kind="relationship" relationship="rootViewController" id="bWn-i0-z8p"/>
+                        <segue destination="w4y-Pk-1Nd" kind="relationship" relationship="rootViewController" id="Aog-aG-Io6"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5TC-P7-nKC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rh4-FN-w5w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3173.5999999999999" y="74.212893553223395"/>
+            <point key="canvasLocation" x="6076" y="73.313343328335833"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="gdc-9d-J7j">
+        <scene sceneID="Izn-nq-giB">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5F9-8w-SAO" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aYe-yZ-gPI" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WcL-eE-3U8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eve-HH-AX2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="w4y-Pk-1Nd" kind="relationship" relationship="rootViewController" id="6Bh-Gs-VRH"/>
+                        <segue destination="cEL-Js-Hyb" kind="relationship" relationship="rootViewController" id="KYq-gu-2VL"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="utC-4e-mUT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mwV-4l-kkb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5048.8000000000002" y="74.212893553223395"/>
+            <point key="canvasLocation" x="4112.8000000000002" y="74.212893553223395"/>
         </scene>
     </scenes>
     <resources>
@@ -410,6 +425,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jKj-8n-q2e"/>
-        <segue reference="ix5-GD-VV1"/>
     </inferredMetricsTieBreakers>
 </document>
