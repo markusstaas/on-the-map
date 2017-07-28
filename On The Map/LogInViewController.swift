@@ -25,8 +25,6 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
                     return
                 }
             }
-        }else{
-            print(error)
         }
     }
     

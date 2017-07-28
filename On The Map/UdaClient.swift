@@ -11,7 +11,6 @@ import Foundation
 
 class UdaClient : NSObject {
     
-    // MARK: Properties
     var session: URLSession
     var registered: Bool? = nil
     var sessionID: String? = nil
@@ -21,22 +20,21 @@ class UdaClient : NSObject {
     var lastName: String? = nil
 
     
-    // MARK: Initializers
+ 
     override init() {
         session = URLSession.shared
         super.init()
     }
     
-    // MARK: Function for POST method - To POST information to Udacity
+ 
     func taskForPOSTMethod(_ method: String, parameters: [String:AnyObject]?, jsonBody: String, completionHandlerForPost: @escaping (_ result: [String:AnyObject]?, _ error: String?) -> Void) -> URLSessionDataTask {
         
-        /* 1. Set the parameters (if any) */
+        
         var parametersForRequest: [String:AnyObject]? = nil
         if (parameters != nil) {
             parametersForRequest = parameters
         }
         
-        /* 2/3. Build the URL, Configure the request */
         let request = NSMutableURLRequest(url: udaURLBuilder(parametersForRequest, withPathExtension: method))
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -44,19 +42,17 @@ class UdaClient : NSObject {
         request.httpBody = jsonBody.data(using: String.Encoding.utf8)
        
         
-        /* 4. Make the request */
+        
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             func sendError(_ error: String) {
-                print(error)
                 completionHandlerForPost(nil, error)
             }
-            /* GUARD: Was there an error? */
+            
             guard (error == nil) else {
-                print("There was an error with your request")
                 sendError("There was an error with your request: \(error!.localizedDescription)")
                 return
             }
-            /* GUARD: Did we get a successful 2XX response? */
+            
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
                 if let response = response as? HTTPURLResponse {
                     print("Your request returned an invalid response. Status Code: \(response.statusCode)!")
@@ -68,32 +64,32 @@ class UdaClient : NSObject {
                 sendError("Invalid Username and/or Password")
                 return
             }
-            /* GUARD: Was there any data returned? */
+           
             guard let data = data else {
-                print("No data was returned by the request")
+                
                 sendError("No data was returned by the request!")
                 return
             }
             
-            /* 5/6 Parse the data and use the data (happens in completion handler) */
+          
             self.convertJSONDataWithCompletionHandler(data, completionHandlerForConvertedData: completionHandlerForPost)
         }
         
-        /* 7. Start the request */
+        
         task.resume()
         return task
     }
     
-    // MARK: Function for GET method - To GET information from Udacity
+   
     func taskForGETMethod(_ method: String, parameters: [String:AnyObject]?, headers: [String:String]?, completionHandlerForGET: @escaping (_ result: [String:AnyObject]?, _ error: String?) -> Void) -> URLSessionDataTask {
         
-        /* 1. Set the parameters (if any) */
+
         var parametersForRequest: [String:AnyObject]? = nil
         if (parameters != nil) {
             parametersForRequest = parameters
         }
         
-        /* 2/3. Build the URL,  Configure the request */
+
         let request = NSMutableURLRequest(url: udaURLBuilder(parametersForRequest, withPathExtension: method))
         if (headers != nil) {
             for (key, value) in headers! {
@@ -101,48 +97,45 @@ class UdaClient : NSObject {
             }
         }
 
-        
-        /* 4. Make the request */
+      
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             func sendError(_ error: String) {
                 print(error)
                 completionHandlerForGET(nil, error)
             }
-            /* GUARD: Was there an error? */
+      
             guard (error == nil) else {
                 sendError("There was an error with your request: \(error!.localizedDescription)")
                 return
             }
-            /* GUARD: Did we get a successful 2XX response? */
+          
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
                 sendError("Your request returned a status code other than 2xx!")
                 return
             }
-            /* GUARD: Was there any data returned? */
             guard let data = data else {
                 sendError("No data was returned by the request!")
                 return
             }
             
-            /* 5/6. Parse the data and use the data (happens in completion handler) */
+            
             self.convertJSONDataWithCompletionHandler(data, completionHandlerForConvertedData: completionHandlerForGET)
         }
-        /* 7. Start the task */
+
         task.resume()
         return task
     }
     
-    // MARK: Logout with Udacity method
+
     func logoutSessionWithUdacity(completionHandlerForLogoutSessionWithUdacity: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
         
-        /* 1. Specify the parameters (for now, "nil", but good to have if method ever changes) */
-        let parameters: [String:AnyObject]? = nil
+               let parameters: [String:AnyObject]? = nil
         let method: String = Methods.LogoutSessionWithUdacity
         
-        /* 2. Make the request */
+        
         let _ = taskForDELETEMethod(method, parameters: parameters) { (results, error) in
             
-            /* 3. Send the desired values to the completion handler */
+           
             guard (error == nil) else {
                 completionHandlerForLogoutSessionWithUdacity(false, error)
                 return
@@ -158,16 +151,16 @@ class UdaClient : NSObject {
             }
         }
     }
-    // MARK: DELETE
+
     func taskForDELETEMethod(_ method: String?, parameters: [String:AnyObject]?, completionHandlerForDeleteMethod: @escaping (_ result: [String: AnyObject]?, _ errorString: String?) -> Void) -> URLSessionDataTask {
         
-        /* 1. Set the parameters (if any) */
+       
         var parametersForRequest: [String:AnyObject]? = nil
         if (parameters != nil) {
             parametersForRequest = parameters
         }
         
-        /* 2/3. Buld the URL, Configure the request */
+       
         let request = NSMutableURLRequest(url: udaURLBuilder(parametersForRequest, withPathExtension: method))
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
@@ -179,54 +172,40 @@ class UdaClient : NSObject {
             request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         }
         
-        /* 4. Make the request */
-        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+            let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             func sendError(_ error: String) {
                 print(error)
                 completionHandlerForDeleteMethod(nil, error)
             }
-            /* GUARD: Was there an error? */
+            
             guard (error == nil) else {
                 print("There was an error with your request")
                 sendError("There was an error with your request: \(error!.localizedDescription)")
                 return
             }
-            /* GUARD: Did we get a successful 2XX response? */
+            
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
                 print("Your request returned a status code other than 2xx!")
                 sendError("Your request returned a status code other than 2xx!")
                 return
             }
-            /* GUARD: Was there any data returned? */
+            
             guard let data = data else {
                 print("No data was returned by the request")
                 sendError("No data was returned by the request!")
                 return
             }
             
-            /* 5/6. Parse the data and use the data (happens in the completion handler) */
+            
             self.convertJSONDataWithCompletionHandler(data, completionHandlerForConvertedData: completionHandlerForDeleteMethod)
         }
         
-        /* 7. Start the request */
+       
         task.resume()
         return task
     }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     //////////HELPERS
-    
-    
-    
     // create the URL
     private func udaURLBuilder(_ parameters: [String:AnyObject]?, withPathExtension: String? = nil) -> URL {
         
@@ -244,13 +223,12 @@ class UdaClient : NSObject {
         return components.url!
     }
     
-    // given raw JSON, return a usable Foundation object
+
     private func convertJSONDataWithCompletionHandler(_ data: Data, completionHandlerForConvertedData: (_ result: [String:AnyObject]?, _ error: String?) -> Void) {
         
         let range = Range(uncheckedBounds: (5, data.count))
         let newData = data.subdata(in: range)
-       // print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
-        var parsedResult: [String:AnyObject]!
+            var parsedResult: [String:AnyObject]!
         do {
             parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String:AnyObject]
         } catch {
@@ -259,7 +237,7 @@ class UdaClient : NSObject {
         completionHandlerForConvertedData(parsedResult, nil)
     }
     
-    // substitute the key for the value that is contained within the method name
+
     func substituteKeyInMethod(_ method: String, key: String, value: String) -> String? {
         
         if method.range(of: "<\(key)>") != nil {
@@ -269,10 +247,7 @@ class UdaClient : NSObject {
         }
     }
     
-    
-    
-    
-    // MARK: - Shared Instance -- Singleton
+
     
     class func sharedInstance() -> UdaClient {
         

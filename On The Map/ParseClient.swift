@@ -42,12 +42,11 @@ class ParseClient: NSObject {
                 request.addValue(value, forHTTPHeaderField: key)
             }
         }
-        print(request.url!)
+
         
         /* 4. Make the request */
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             func sendError(_ error: String) {
-                print(error)
                 completionHandlerForGET(nil, error)
             }
             /* GUARD: Was there an error? */
@@ -94,30 +93,26 @@ class ParseClient: NSObject {
         }
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonBody.data(using: String.Encoding.utf8)
-        print(request.httpBody!)
-        print(request.url!)
+      
         
         /* 4. Make the request */
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             func sendError(_ error: String) {
-                print(error)
                 completionHandlerForPost(nil, error)
             }
             /* GUARD: Was there an error? */
             guard (error == nil) else {
-                print("There was an error with your request")
+                
                 sendError("There was an error with your request: \(error!.localizedDescription)")
                 return
             }
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                print("Your request returned a status code other than 2xx!")
                 sendError("Your request returned a status code other than 2xx!")
                 return
             }
             /* GUARD: Was there any data returned? */
             guard let data = data else {
-                print("No data was returned by the request")
                 sendError("No data was returned by the request!")
                 return
             }
@@ -150,46 +145,39 @@ class ParseClient: NSObject {
         }
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonBody.data(using: String.Encoding.utf8)
-        print(request.httpBody!)
-        print(request.url!)
+       
         
         /* 4. Make the request */
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             func sendError(_ error: String) {
-                print(error)
                 completionHandlerForPost(nil, error)
             }
             /* GUARD: Was there an error? */
             guard (error == nil) else {
-                print("There was an error with your request")
                 sendError("There was an error with your request: \(error!.localizedDescription)")
                 return
             }
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                print("Your request returned a status code other than 2xx!")
                 sendError("Your request returned a status code other than 2xx!")
                 return
             }
             /* GUARD: Was there any data returned? */
             guard let data = data else {
-                print("No data was returned by the request")
                 sendError("No data was returned by the request!")
                 return
             }
-            print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
-            
-            /* 5/6 Parse the data and use the data (happens in completion handler) */
+    
+            // 5/6 Parse the data and use the data
             self.convertDataWithCompletionHandler(data, completionHandlerForConvertedData: completionHandlerForPost)
         }
         
-        /* 7. Start the request */
+        // 7. Start the request
         task.resume()
         return task
     }
     
-    // MARK: Helpers
-    // substitute the key for the value that is contained within the method name
+
     func substituteKeyInMethod(_ method: String, key: String, value: String) -> String? {
         
         if method.range(of: "<\(key)>") != nil {
@@ -220,7 +208,7 @@ class ParseClient: NSObject {
     // given raw JSON, return a usable Foundation object
     private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertedData: (_ result: [String:AnyObject]?, _ error: String?) -> Void) {
         
-        print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
+        
         var parsedResult: [String:AnyObject]?
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:AnyObject]
