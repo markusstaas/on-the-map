@@ -9,14 +9,13 @@
 import Foundation
 import UIKit
 
-// MARK: - ParseClient (Convenient Resource Methods[s])
 
 extension ParseClient {
     
-    // create an array of StudentInformation dictionaries from parsed results
+
     func getStudentLocations(completionHandlerForGetStudentLocations: @escaping (_ success: Bool, _ results: [Student.StudentInformation]?, _ errorString: String?) -> Void) {
         
-        /* 1. Specify the parameters */
+
         let parameters: [String:AnyObject]? = [
             ParseClient.ParameterKeys.Limit: ParseClient.ParameterValues.Limit as AnyObject,
             ParseClient.ParameterKeys.Order: ParseClient.ParameterValues.Order as AnyObject
@@ -24,10 +23,9 @@ extension ParseClient {
         let method: String = Methods.GetStudentLocations
         let headerFields = ["X-Parse-Application-Id": ParseClient.Constants.ApplicationID, "X-Parse-REST-API-Key": ParseClient.Constants.ApiKey]
         
-        /* 2. Make the request */
-        let _ = taskForGETMethod(method, parameters: parameters, headers: headerFields) { (results, error) in
+              let _ = taskForGETMethod(method, parameters: parameters, headers: headerFields) { (results, error) in
             
-            /* 3. Send the desired values to the completion handler */
+
             guard (error == nil) else {
                 completionHandlerForGetStudentLocations(false, nil, error)
                 return

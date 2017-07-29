@@ -36,10 +36,18 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         super.viewDidLoad()
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         session = URLSession.shared
+        self.userEmailField.delegate = self
+        self.userPasswordField.delegate = self
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
          Helper.areWeOnline()
+    }
+  
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     @IBAction func UdaLoginButton(_ sender: Any) {
@@ -76,7 +84,6 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         Helper.areWeOnline()
         let url = URL(string: UdaClient.Constants.UdacityRegistration)!
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    
     }
 
     

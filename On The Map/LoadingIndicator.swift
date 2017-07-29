@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-// MARK: ActivityIndicator
 
 class LoadingIndicator {
     
@@ -48,7 +47,7 @@ class LoadingIndicator {
         UIApplication.shared.endIgnoringInteractionEvents()
     }
     
-    // MARK: Shared Instance
+
     class func sharedInstance() -> LoadingIndicator {
         struct Singleton {
             static var sharedInstance = LoadingIndicator()

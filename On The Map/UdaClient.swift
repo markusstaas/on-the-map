@@ -100,7 +100,6 @@ class UdaClient : NSObject {
       
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             func sendError(_ error: String) {
-                print(error)
                 completionHandlerForGET(nil, error)
             }
       
@@ -110,7 +109,7 @@ class UdaClient : NSObject {
             }
           
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                sendError("Your request returned a status code other than 2xx!")
+                sendError("The server returned a connection error, please try again")
                 return
             }
             guard let data = data else {
@@ -179,19 +178,16 @@ class UdaClient : NSObject {
             }
             
             guard (error == nil) else {
-                print("There was an error with your request")
                 sendError("There was an error with your request: \(error!.localizedDescription)")
                 return
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                print("Your request returned a status code other than 2xx!")
-                sendError("Your request returned a status code other than 2xx!")
+                sendError("The server returned a connection error, please try again")
                 return
             }
             
             guard let data = data else {
-                print("No data was returned by the request")
                 sendError("No data was returned by the request!")
                 return
             }

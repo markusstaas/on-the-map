@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddStudentLocationViewController: UIViewController {
+class AddStudentLocationViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var userAddressField: UITextField!
     @IBOutlet weak var userURLField: UITextField!
@@ -23,6 +23,12 @@ class AddStudentLocationViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         Helper.areWeOnline()
+        self.userAddressField.delegate = self
+        self.userURLField.delegate = self
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     @IBAction func continueButt(_ sender: Any) {

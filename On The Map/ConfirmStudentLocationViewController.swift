@@ -21,7 +21,7 @@ class ConfirmStudentLocationViewController: UIViewController, MKMapViewDelegate,
     var userLatitude: Double = 0.0
     
     @IBAction func backButt(_ sender: Any) {
-            self.dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
     }
     
     @IBAction func submitButt(_ sender: Any) {
@@ -34,24 +34,18 @@ class ConfirmStudentLocationViewController: UIViewController, MKMapViewDelegate,
                     if success {
                         
                         Helper.showErrorAlert(message: "Data successfully submitted")
-                        
-                        let listVC = self.storyboard?.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
-                        
-                        self.navigationController?.pushViewController(listVC, animated: true)
+                        self.dismiss(animated: true, completion: nil)
                     } else {
                         Helper.showErrorAlert(message: "Update error: \(String(describing: errorString))")
                     }
                 }
-            }
-       
-        
-        
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         mapPreview()
             
-        }
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         Helper.areWeOnline()
@@ -85,6 +79,5 @@ class ConfirmStudentLocationViewController: UIViewController, MKMapViewDelegate,
             self.mapView.addAnnotation(annotation)
             LoadingIndicator.sharedInstance().stopIndicator(self)
         }
-        
     }
 }

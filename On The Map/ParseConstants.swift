@@ -28,14 +28,12 @@ extension ParseClient {
         static let Order = "order"
         static let Where = "where"
     }
-    
-    // MARK: Parameter Values
+
     struct ParameterValues {
         static let Limit = "100"
         static let Order = "-updatedAt"
     }
-    
-    // MARK: Parse JSON Response Keys
+
     struct ResponseKeys {
         static let Results = "results"
         static let CreatedAt = "createdAt"
