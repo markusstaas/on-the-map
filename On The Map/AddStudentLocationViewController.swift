@@ -14,13 +14,14 @@ class AddStudentLocationViewController: UIViewController {
     @IBOutlet weak var userURLField: UITextField!
     
     @IBAction func backButt(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         Helper.areWeOnline()
     }
     

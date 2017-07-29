@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 
-class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LogInViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var userEmailField: UITextField!
     @IBOutlet weak var userPasswordField: UITextField!
@@ -38,6 +38,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         session = URLSession.shared
     }
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
          Helper.areWeOnline()
     }
     
@@ -46,8 +47,6 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         let userEmail = userEmailField.text
         let userPassword = userPasswordField.text
         
-        
-        
         guard userEmail?.isEmpty == false else {
             Helper.showErrorAlert(message: "Please enter your email address")
             return
@@ -55,7 +54,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         guard userPassword?.isEmpty == false else {
             Helper.showErrorAlert(message: "Please enter your password")
             return
-        
+        }
         
         LoadingIndicator.sharedInstance().startIndicator(self)
         UdaClient.sharedInstance().authenticateWithViewController(self, username: userEmail, password: userPassword){
@@ -69,7 +68,6 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
                     Helper.showErrorAlert(message: errorString!)
                 }
             }
-        }
     }
  }
 

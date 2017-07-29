@@ -15,12 +15,11 @@ class ListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.automaticallyAdjustsScrollViewInsets = false
         getLocationsForTableView()
-
         
     }
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         Helper.areWeOnline()
     }
     

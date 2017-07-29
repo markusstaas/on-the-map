@@ -82,8 +82,6 @@ extension ParseClient {
         
         
         let _ = taskForGETMethod(method, parameters: parameters, headers: headerFields) { (results, error) in
-            
-            
             guard (error == nil) else {
             completionHandlerForGetStudentLocation(false, nil, error)
                 return
@@ -102,20 +100,15 @@ extension ParseClient {
         }
     }
     
-    
     private func postStudentLocation(_ mapString: String?, _ mediaURL: String?, _ latitude: Double?, _ longitude: Double?, completionHandlerForPostStudentLocation: @escaping (_ success: Bool, _ objectId: String?, _ errorString: String?) -> Void) {
-        
         
         let parameters: [String:AnyObject]? = nil
         let method: String = Methods.PostStudentLocation
         let headerFields = ["X-Parse-Application-Id": ParseClient.Constants.ApplicationID, "X-Parse-REST-API-Key": ParseClient.Constants.ApiKey]
         let jsonBody = "{\"uniqueKey\": \"\(UdaClient.sharedInstance().userID!)\", \"firstName\": \"\(UdaClient.sharedInstance().firstName!)\", \"lastName\": \"\(UdaClient.sharedInstance().lastName!)\",\"mapString\": \"\(mapString!)\", \"mediaURL\": \"\(mediaURL!)\",\"latitude\": \(latitude!), \"longitude\": \(longitude!)}"
         
-        
-        
         let _ = taskForPOSTMethod(method, parameters: parameters, headers: headerFields, jsonBody: jsonBody) { (results, error) in
             
-          
             guard (error == nil) else {
                 completionHandlerForPostStudentLocation(false, nil, error)
                 return
@@ -129,17 +122,13 @@ extension ParseClient {
     }
     
     private func putStudentLocation(_ mapString: String?, _ mediaURL: String?, _ latitude: Double?, longitude: Double?, completionHandlerForPutStudentLocation: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
-        
-        
+
         let parameters: [String:AnyObject]? = nil
         var mutableMethod: String = Methods.PutStudentLocation
         mutableMethod = substituteKeyInMethod(mutableMethod, key: ParseClient.ResponseKeys.ObjectID, value: Student.StudentInformation.sharedInstance.objectId!)!
         let headerFields = ["X-Parse-Application-Id": ParseClient.Constants.ApplicationID, "X-Parse-REST-API-Key": ParseClient.Constants.ApiKey]
         let jsonBody = "{\"uniqueKey\": \"\(UdaClient.sharedInstance().userID!)\", \"firstName\": \"\(UdaClient.sharedInstance().firstName!)\", \"lastName\": \"\(UdaClient.sharedInstance().lastName!)\",\"mapString\": \"\(mapString!)\", \"mediaURL\": \"\(mediaURL!)\",\"latitude\": \(latitude!), \"longitude\": \(longitude!)}"
-        
-        
         let _ = taskForPUTMethod(mutableMethod, parameters: parameters, headers: headerFields, jsonBody: jsonBody) { (results, error) in
-            
             
             guard (error == nil) else {
                 completionHandlerForPutStudentLocation(false, error)

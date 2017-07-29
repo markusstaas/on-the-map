@@ -53,6 +53,7 @@ class ConfirmStudentLocationViewController: UIViewController, MKMapViewDelegate,
             
         }
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         Helper.areWeOnline()
     }
     
